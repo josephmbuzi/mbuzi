@@ -42,18 +42,18 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   }
 
   return (
-    <main className="min-h-screen bg-white px-5 pb-24 pt-10 text-[#202124] sm:px-8 lg:px-12">
+    <main className="min-h-screen bg-black px-5 pb-24 pt-24 text-white sm:px-8 sm:pt-28 lg:px-12">
       <div className="mx-auto w-full max-w-[1376px]">
         <Link
           href="/#articles"
-          className="text-sm font-medium text-zinc-500 transition-colors hover:text-[#4965bf]"
+          className="text-sm font-medium text-zinc-400 transition-colors hover:text-white"
         >
           Back to articles
         </Link>
 
         <article className="mx-auto mt-24 max-w-[1210px] sm:mt-28">
           <header className="mx-auto max-w-[1180px] text-center">
-            <h1 className="mx-auto max-w-[1160px] text-balance font-extralight leading-[1.14] tracking-normal text-zinc-900 text-[clamp(2.75rem,5vw,5rem)]">
+            <h1 className="mx-auto max-w-[1160px] text-balance font-extralight leading-[1.14] tracking-normal text-white text-[clamp(2.75rem,5vw,5rem)]">
               {article.title}
             </h1>
             <time
@@ -64,18 +64,18 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
             </time>
           </header>
 
-          <div className="mt-16 text-[clamp(1.35rem,2vw,2rem)] leading-[1.65] text-zinc-800 sm:mt-20">
+          <div className="mt-16 text-[clamp(1.35rem,2vw,2rem)] leading-[1.65] text-white sm:mt-20">
             {article.sections.map((section, sectionIndex) => (
               <section
                 key={section.heading ?? `intro-${sectionIndex}`}
                 className={
                   sectionIndex === 0
                     ? ""
-                    : "mt-20 border-t border-zinc-200 pt-20"
+                    : "mt-20 border-t border-zinc-800 pt-20"
                 }
               >
                 {section.heading ? (
-                  <h2 className="mb-8 text-[clamp(2rem,3vw,3rem)] font-bold leading-tight text-zinc-900">
+                  <h2 className="mb-8 text-[clamp(2rem,3vw,3rem)] font-bold leading-tight text-white">
                     {section.heading}
                   </h2>
                 ) : null}
@@ -116,9 +116,9 @@ function highlightParagraph(paragraph: string) {
     <>
       {before}
       {isStrong ? (
-        <strong className="font-bold text-zinc-900">{phrase}</strong>
+        <strong className="font-bold text-white">{phrase}</strong>
       ) : (
-        <span className="text-[#3b73d9]">{phrase}</span>
+        <span className="text-white">{phrase}</span>
       )}
       {after}
     </>

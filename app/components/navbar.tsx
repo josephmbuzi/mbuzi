@@ -2,11 +2,8 @@ import Link from "next/link";
 
 const navItems = [
   { label: "GitHub", href: "https://github.com" },
-  { label: "Press", href: "#press" },
-  { label: "Biography", href: "#biography" },
-  { label: "LinkedIn", href: "https://linkedin.com" },
-  { label: "Twitter", href: "https://twitter.com" },
-  { label: "Newsletter", href: "#newsletter", emphasis: true },
+  { label: "Biography", href: "/#biography" },
+  { label: "Newsletter", href: "/#newsletter", emphasis: true },
 ];
 
 export function Navbar() {
@@ -31,7 +28,7 @@ export function Navbar() {
         </div>
 
         <Link
-          href="#blog"
+          href="/#articles"
           className="inline-flex h-10 items-center justify-center rounded bg-[#6aa8e8] px-4 text-sm font-medium text-[#12304b] transition-colors hover:bg-[#7db6ef] sm:h-11 sm:px-5"
         >
           Blog
