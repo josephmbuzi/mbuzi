@@ -1,3 +1,4 @@
+import { CaseStudies } from "./components/case-studies";
 import { Hero } from "./components/hero";
 import { Navbar } from "./components/navbar";
 import { Showings } from "./components/showings";
@@ -8,6 +9,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Showings />
+      <CaseStudies />
     </main>
   );
 }
