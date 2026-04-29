@@ -32,7 +32,7 @@ export function BookCard({
 
         <div className="flex h-full flex-col justify-between p-3.5 pt-6.5">
           <div>
-            <p className="text-[9px] font-bold uppercase text-red-500">Mbuzi</p>
+            <p className="text-[9px] font-bold uppercase text-red-500">africanauthors</p>
             <h3 className="mt-3 text-[clamp(0.95rem,1.35vw,1.3rem)] font-semibold leading-[0.98]">
               {title}
             </h3>
