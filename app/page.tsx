@@ -1,3 +1,4 @@
+import { Articles } from "./components/articles";
 import { CaseStudies } from "./components/case-studies";
 import { Hero } from "./components/hero";
 import { Navbar } from "./components/navbar";
@@ -10,6 +11,7 @@ export default function Home() {
       <Hero />
       <Showings />
       <CaseStudies />
+      <Articles />
     </main>
   );
 }

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Showings } from "./showings";
 
 const highlights = [
   "Systems Engineer",
