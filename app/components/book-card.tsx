@@ -22,7 +22,7 @@ export function BookCard({
   return (
     <article className="group">
       <div
-        className={`relative aspect-[0.58] w-full overflow-hidden rounded bg-zinc-100 shadow-[0_10px_26px_rgba(0,0,0,0.24)] ${variantStyles[variant]}`}
+        className={`relative aspect-[0.7] w-full overflow-hidden rounded bg-zinc-100 shadow-[0_10px_26px_rgba(0,0,0,0.24)] ${variantStyles[variant]}`}
       >
         <div className="absolute inset-x-0 top-0 h-5 border-b border-black/10 bg-white/45" />
         <div
@@ -36,15 +36,6 @@ export function BookCard({
             <h3 className="mt-3 text-[clamp(0.95rem,1.35vw,1.3rem)] font-semibold leading-[0.98]">
               {title}
             </h3>
-          </div>
-
-          <div className="relative h-20">
-            <div
-              className="absolute bottom-1.5 right-1.5 h-16 w-16 rounded-full opacity-90"
-              style={{ backgroundColor: accent }}
-            />
-            <div className="absolute bottom-6 right-9 h-13 w-13 rotate-45 rounded bg-black/10" />
-            <div className="absolute bottom-0 left-0 h-1 w-14 rounded-full bg-black/15" />
           </div>
 
           <p className="text-[9px] font-semibold">{kicker}</p>

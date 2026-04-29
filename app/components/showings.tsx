@@ -74,7 +74,7 @@ export function Showings() {
           Books
         </h2>
 
-        <div className="mt-8 grid grid-cols-2 gap-x-8 gap-y-18 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 xl:gap-x-14">
+        <div className="mt-8 grid grid-cols-2 gap-x-2 gap-y-12 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 xl:gap-x-6">
           {books.map((book) => (
             <BookCard key={book.title} {...book} />
           ))}
