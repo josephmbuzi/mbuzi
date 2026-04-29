@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 type ArticleCardProps = {
   title: string;
@@ -20,7 +21,7 @@ export function ArticleCard({
   visual = "headline",
 }: ArticleCardProps) {
   return (
-    <a
+    <Link
       href={href}
       className="group block focus:outline-none"
       aria-label={`Read ${title}`}
@@ -54,7 +55,7 @@ export function ArticleCard({
       <h3 className="mt-5 max-w-[19rem] text-[1.22rem] font-bold leading-[1.16] text-zinc-800 transition-colors group-hover:text-[#4965bf] sm:text-[1.38rem]">
         {title}
       </h3>
-    </a>
+    </Link>
   );
 }
 
