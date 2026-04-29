@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Karla } from "next/font/google";
 
 const highlights = [
   "Systems Engineer",
@@ -20,11 +19,6 @@ const highlights = [
   "Substack",
   "LeadDev",
 ];
-
-const karla = Karla({
-  subsets: ["latin"],
-  weight: ["400", "500", "700", "800"],
-});
 
 function Highlight({ children }: { children: React.ReactNode }) {
   return <span className="text-[#e4db55]">{children}</span>;
@@ -49,14 +43,13 @@ export function Hero() {
         <div className="absolute inset-0 bg-linear-to-r from-black via-black/35 to-transparent lg:from-black/20" />
       </div>
 
-      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-460 items-start px-5 pb-12 pt-24 sm:px-8 sm:pb-16 lg:px-12 lg:pb-20">
+      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-350 items-start px-5 pb-12 pt-24 sm:px-8 sm:pb-16 lg:px-12 lg:pb-20">
         <div className="max-w-250">
-
-          <p className="mt-28 text-[clamp(1.7rem,2.1vw,3rem)] font-medium leading-none text-zinc-500">
+          <p className="mt-24 text-3xl font-medium leading-[0.95] tracking-[-0.01em] text-zinc-500 sm:mt-26 sm:text-4xl md:mt-28 md:text-5xl lg:text-4xl">
             Systems engineer
           </p>
 
-          <p className="mt-6 max-w-300 text-[clamp(1.12rem,1.35vw,1.65rem)] font-medium leading-[1.12] text-zinc-100">
+          <p className="mt-5 max-w-300 text-lg leading-[1.3] text-zinc-100 sm:mt-6 sm:text-xl sm:leading-[1.26] md:text-2xl md:leading-[1.22] lg:text-[1.3rem] lg:leading-[1.2]">
             Joseph Mbuzi is a <Highlight>{highlights[0]}</Highlight> and
             a business man focused on helping startups and businesses ship useful
             products with modern web platforms, mobile apps, cloud systems, and AI tools. He
