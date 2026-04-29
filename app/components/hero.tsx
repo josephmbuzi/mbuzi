@@ -2,10 +2,10 @@ import Image from "next/image";
 import { Karla } from "next/font/google";
 
 const highlights = [
-  "Software Engineer",
-  "Google Cloud AI",
+  "Systems Engineer",
+  "Business automation",
   "Gemini",
-  "Chrome",
+  "Branding",
   "Google DeepMind",
   "AI-assisted engineering",
   "previously",
@@ -23,7 +23,7 @@ const highlights = [
 
 const karla = Karla({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "500", "700", "800"],
 });
 
 function Highlight({ children }: { children: React.ReactNode }) {
@@ -49,33 +49,25 @@ export function Hero() {
         <div className="absolute inset-0 bg-linear-to-r from-black via-black/35 to-transparent lg:from-black/20" />
       </div>
 
-      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-460 items-start px-5 pb-12 pt-48 sm:px-8 sm:pb-16 lg:px-12 lg:pb-20">
+      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-460 items-start px-5 pb-12 pt-24 sm:px-8 sm:pb-16 lg:px-12 lg:pb-20">
         <div className="max-w-250">
-         <h1 className={`${karla.className} text-[clamp(4.5rem,8vw,12rem)] font-black text-white`}>
-  Joseph Mbuzi
-</h1>
 
           <p className="mt-28 text-[clamp(1.7rem,2.1vw,3rem)] font-medium leading-none text-zinc-500">
-            Software engineer
+            Systems engineer
           </p>
 
           <p className="mt-6 max-w-300 text-[clamp(1.12rem,1.35vw,1.65rem)] font-medium leading-[1.12] text-zinc-100">
             Joseph Mbuzi is a <Highlight>{highlights[0]}</Highlight> and
             a business man focused on helping startups and businesses ship useful
-            products with modern web platforms, cloud systems, and AI tools. He
+            products with modern web platforms, mobile apps, cloud systems, and AI tools. He
             works across product, engineering, and developer relations, with a
-            practical interest in <Highlight>{highlights[1]}</Highlight>,{" "}
-            <Highlight>{highlights[2]}</Highlight>, and thoughtful developer
-            experience. After years building for the web, including work around{" "}
-            <Highlight>{highlights[3]}</Highlight>-style performance,
+            practical interest in <Highlight>{highlights[1]}</Highlight>, and thoughtful developer
+            experience. After years of building web apps, including work around{" "}
+            <Highlight>{highlights[3]}</Highlight>,
             tooling, and reliable product delivery, he now bridges technical
             strategy, engineering practice, and product communication.
-            Passionate about <Highlight>{highlights[5]}</Highlight> and
-            developer tools, he shares writing, projects, and talks through his{" "}
-            <Highlight>{highlights[10]}</Highlight>,{" "}
-            <Highlight>{highlights[11]}</Highlight>,{" "}
-            <Highlight>{highlights[12]}</Highlight>, and{" "}
-            <Highlight>{highlights[14]}</Highlight>.
+            He shares writing, projects, and talks through his{" "}
+            <Highlight>{highlights[14]}</Highlight>,{" "}
           </p>
         </div>
       </div>
