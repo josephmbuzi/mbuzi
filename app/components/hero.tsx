@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Showings } from "./showings";
 
 const highlights = [
   "Systems Engineer",
@@ -28,7 +29,7 @@ export function Hero() {
   return (
     <section
       id="biography"
-      className="relative isolate min-h-screen overflow-hidden bg-black text-white"
+      className="relative isolate overflow-hidden bg-black text-white"
     >
       <div className="absolute right-0 top-22 z-0 h-[34vh] w-full opacity-60 sm:top-24 sm:h-[42vh] lg:h-[52vh] lg:w-[49vw] lg:opacity-80">
         <Image
@@ -43,7 +44,7 @@ export function Hero() {
         <div className="absolute inset-0 bg-linear-to-r from-black via-black/35 to-transparent lg:from-black/20" />
       </div>
 
-      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-350 items-start px-5 pb-12 pt-24 sm:px-8 sm:pb-16 lg:px-12 lg:pb-20">
+      <div className="relative z-10 mx-auto flex w-full max-w-350 items-start px-5 pt-24 sm:px-8 sm:pb-16 lg:px-12">
         <div className="max-w-250">
           <p className="mt-24 text-3xl font-medium leading-[0.95] tracking-[-0.01em] text-zinc-500 sm:mt-26 sm:text-4xl md:mt-28 md:text-5xl lg:text-4xl">
             Systems engineer
