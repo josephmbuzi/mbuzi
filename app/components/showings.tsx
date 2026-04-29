@@ -65,8 +65,11 @@ const books = [
 
 export function Showings() {
   return (
-    <section id="books" className="bg-black px-5 text-white sm:px-12 lg:px-12">
-      <div className="mx-auto w-full  max-w-350 items-start px-5 sm:px-8 sm:pb-16 lg:px-12">
+    <section
+      id="books"
+      className="flex flex-col items-start bg-black px-5 text-white sm:px-12 lg:px-12"
+    >
+      <div className="w-full max-w-280 px-5 sm:px-8 sm:pb-16 lg:px-12">
         <h2 className="text-2xl font-bold leading-none text-zinc-400 sm:text-2xl">
           Books
         </h2>

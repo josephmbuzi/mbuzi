@@ -22,36 +22,36 @@ export function BookCard({
   return (
     <article className="group">
       <div
-        className={`relative aspect-[0.64] w-full overflow-hidden rounded bg-zinc-100 shadow-[0_18px_45px_rgba(0,0,0,0.32)] ${variantStyles[variant]}`}
+        className={`relative aspect-[0.58] w-full overflow-hidden rounded bg-zinc-100 shadow-[0_10px_26px_rgba(0,0,0,0.24)] ${variantStyles[variant]}`}
       >
-        <div className="absolute inset-x-0 top-0 h-7 border-b border-black/10 bg-white/45" />
+        <div className="absolute inset-x-0 top-0 h-5 border-b border-black/10 bg-white/45" />
         <div
-          className="absolute left-0 top-0 h-full w-2"
+          className="absolute left-0 top-0 h-full w-1"
           style={{ backgroundColor: accent }}
         />
 
-        <div className="flex h-full flex-col justify-between p-5 pt-10">
+        <div className="flex h-full flex-col justify-between p-3.5 pt-6.5">
           <div>
-            <p className="text-xs font-bold uppercase text-red-500">Mbuzi</p>
-            <h3 className="mt-5 text-[clamp(1.35rem,2vw,2rem)] font-semibold leading-[0.94]">
+            <p className="text-[9px] font-bold uppercase text-red-500">Mbuzi</p>
+            <h3 className="mt-3 text-[clamp(0.95rem,1.35vw,1.3rem)] font-semibold leading-[0.98]">
               {title}
             </h3>
           </div>
 
-          <div className="relative h-28">
+          <div className="relative h-20">
             <div
-              className="absolute bottom-2 right-2 h-24 w-24 rounded-full opacity-90"
+              className="absolute bottom-1.5 right-1.5 h-16 w-16 rounded-full opacity-90"
               style={{ backgroundColor: accent }}
             />
-            <div className="absolute bottom-9 right-13 h-20 w-20 rotate-45 rounded bg-black/10" />
-            <div className="absolute bottom-0 left-0 h-2 w-22 rounded-full bg-black/15" />
+            <div className="absolute bottom-6 right-9 h-13 w-13 rotate-45 rounded bg-black/10" />
+            <div className="absolute bottom-0 left-0 h-1 w-14 rounded-full bg-black/15" />
           </div>
 
-          <p className="text-xs font-semibold">{kicker}</p>
+          <p className="text-[9px] font-semibold">{kicker}</p>
         </div>
       </div>
 
-      <h3 className="mt-5 text-[1.35rem] font-normal leading-[1.08] text-zinc-500 transition-colors group-hover:text-zinc-200">
+      <h3 className="mt-3 text-[0.92rem] font-normal leading-[1.15] text-zinc-500 transition-colors group-hover:text-zinc-200">
         {title}
       </h3>
     </article>
