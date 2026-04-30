@@ -4,7 +4,6 @@ const navItems = [
   { label: "GitHub", href: "https://github.com/josephmbuzi" },
   { label: "Medium", href: "https://medium.com/@josephmbuzi9" },
   { label: "Quora", href: "https://www.quora.com/profile/Joseph-Mbuzi-2" },
-  { label: "Newsletter", href: "/#newsletter", emphasis: true },
 ];
 
 export function Navbar() {
@@ -19,9 +18,7 @@ export function Navbar() {
             <Link
               key={item.label}
               href={item.href}
-              className={`transition-colors hover:text-white ${
-                item.emphasis ? "font-semibold text-zinc-200" : ""
-              }`}
+              className={`transition-colors hover:text-white `}
             >
               {item.label}
             </Link>
