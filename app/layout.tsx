@@ -1,10 +1,64 @@
 import type { Metadata } from "next";
 import { Navbar } from "./components/navbar";
+import { siteConfig } from "./lib/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Mbuzi.com",
-  description: "Software engineer, builder, and engineering leader.",
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.title,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  applicationName: siteConfig.name,
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  keywords: [
+    "Joseph Mbuzi",
+    "systems engineer",
+    "business automation",
+    "developer experience",
+    "digital platforms",
+    "software engineer",
+    "Zambia software engineer",
+  ],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "profile",
+    locale: siteConfig.locale,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [
+      {
+        url: siteConfig.image,
+        width: 1672,
+        height: 941,
+        alt: "Joseph Mbuzi, systems engineer building scalable digital platforms",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: [siteConfig.image],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 };
 
 export default function RootLayout({
