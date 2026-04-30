@@ -12,9 +12,9 @@ export function Navbar() {
     <header className="absolute inset-x-0 top-0 z-20">
       <nav
         aria-label="Primary navigation"
-        className="mx-auto flex h-16 w-full max-w-[1840px] items-center justify-end px-4 text-xs font-medium text-zinc-400 sm:h-20 sm:px-8 sm:text-sm lg:px-12"
+        className="mx-auto flex h-16 w-full max-w-460 items-center justify-end gap-5 px-5 text-sm font-medium text-zinc-400 sm:h-20 sm:gap-8 sm:px-8 lg:px-12"
       >
-        <div className="flex items-center gap-3 sm:gap-8">
+        <div className="hidden items-center gap-5 sm:flex sm:gap-8">
           {navItems.map((item) => (
             <Link
               key={item.label}
