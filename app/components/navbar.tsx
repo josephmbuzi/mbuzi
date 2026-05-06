@@ -2,8 +2,6 @@ import Link from "next/link";
 
 const navItems = [
   { label: "GitHub", href: "https://github.com/josephmbuzi" },
-  { label: "Medium", href: "https://medium.com/@josephmbuzi9" },
-  { label: "Quora", href: "https://www.quora.com/profile/Joseph-Mbuzi-2" },
 ];
 
 export function Navbar() {
