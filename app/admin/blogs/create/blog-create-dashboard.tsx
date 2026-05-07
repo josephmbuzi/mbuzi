@@ -51,12 +51,17 @@ export function BlogCreateDashboard() {
 
   const previewPost = useMemo(() => {
     const content = splitBlogContent(form.content);
+    const seoDescription =
+      form.seoDescription.trim() ||
+      form.excerpt.trim() ||
+      "Add a focused SEO description for search results.";
 
     return {
       slug: createSlug(form.title),
       title: form.title || "Untitled blog post",
       category: form.category,
       excerpt: form.excerpt || "Add a short excerpt for the blog list.",
+      seoDescription,
       date: formatDisplayDate(form.publishedAt),
       publishedAt: form.publishedAt,
       readTime: estimateReadTime(form.content),
@@ -238,6 +243,25 @@ export function BlogCreateDashboard() {
                 />
               </label>
 
+              <label className="mt-4 block text-sm font-medium text-zinc-300">
+                SEO meta description
+                <textarea
+                  value={form.seoDescription}
+                  onChange={(event) =>
+                    setForm((currentForm) => ({
+                      ...currentForm,
+                      seoDescription: event.target.value,
+                    }))
+                  }
+                  maxLength={180}
+                  className="mt-2 min-h-24 w-full resize-y border border-white/10 bg-black px-4 py-3 leading-6 text-white outline-none transition-colors focus:border-[#e4db55]/60"
+                  placeholder="Write a clear 140-160 character search description."
+                />
+                <span className="mt-2 block text-xs text-zinc-500">
+                  {previewPost.seoDescription.length}/160 recommended, 180 max
+                </span>
+              </label>
+
               <div className="mt-4">
                 <label
                   htmlFor="blog-body"
@@ -373,6 +397,20 @@ export function BlogCreateDashboard() {
               <p className="mt-4 text-sm leading-6 text-zinc-400">
                 {previewPost.excerpt}
               </p>
+              <div className="mt-6 border border-white/10 bg-black p-4">
+                <p className="text-xs font-semibold uppercase text-zinc-500">
+                  Search preview
+                </p>
+                <p className="mt-3 text-lg font-medium leading-tight text-[#8ab4f8]">
+                  {previewPost.title}
+                </p>
+                <p className="mt-1 text-xs text-zinc-500">
+                  mbuzi.bio/blogs/{previewPost.slug || "post-slug"}
+                </p>
+                <p className="mt-3 text-sm leading-6 text-zinc-300">
+                  {previewPost.seoDescription}
+                </p>
+              </div>
               {previewPost.content.length > 0 ? (
                 <BlogContent
                   content={previewPost.content}

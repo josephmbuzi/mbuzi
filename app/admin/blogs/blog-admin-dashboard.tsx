@@ -134,6 +134,14 @@ export function BlogAdminDashboard() {
                 <p className="mt-4 max-w-245 text-sm leading-6 text-zinc-400">
                   {selectedPost.excerpt}
                 </p>
+                <div className="mt-6 border border-white/10 bg-black p-4">
+                  <p className="text-xs font-semibold uppercase text-zinc-500">
+                    SEO meta description
+                  </p>
+                  <p className="mt-3 max-w-245 text-sm leading-6 text-zinc-300">
+                    {selectedPost.seoDescription || selectedPost.excerpt}
+                  </p>
+                </div>
                 <BlogContent
                   content={selectedPost.content}
                   className="mt-8 space-y-6 text-[0.95rem] leading-7 text-zinc-300"

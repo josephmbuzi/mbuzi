@@ -6,6 +6,7 @@ export type BlogPost = {
   readTime: string;
   category: string;
   excerpt: string;
+  seoDescription?: string;
   content: string[];
 };
 

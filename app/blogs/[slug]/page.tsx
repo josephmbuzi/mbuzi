@@ -29,15 +29,17 @@ export async function generateMetadata({
     };
   }
 
+  const description = post.seoDescription || post.excerpt;
+
   return {
     title: post.title,
-    description: post.excerpt,
+    description,
     alternates: {
       canonical: `/blogs/${post.slug}`,
     },
     openGraph: {
       title: `${post.title} | ${siteConfig.name}`,
-      description: post.excerpt,
+      description,
       type: "article",
       url: `/blogs/${post.slug}`,
       publishedTime: post.publishedAt,
@@ -66,7 +68,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
-    description: post.excerpt,
+    description: post.seoDescription || post.excerpt,
     datePublished: post.publishedAt,
     author: {
       "@type": "Person",

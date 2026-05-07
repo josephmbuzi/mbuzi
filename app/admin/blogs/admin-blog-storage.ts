@@ -10,6 +10,7 @@ export const emptyPost = {
   title: "",
   category: "Systems",
   excerpt: "",
+  seoDescription: "",
   content: "",
 };
 
