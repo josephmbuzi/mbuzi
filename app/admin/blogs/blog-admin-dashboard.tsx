@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { BlogContent } from "../../components/blog-content";
 import {
   type EditablePost,
   getInitialPosts,
@@ -133,11 +134,10 @@ export function BlogAdminDashboard() {
                 <p className="mt-4 max-w-245 text-sm leading-6 text-zinc-400">
                   {selectedPost.excerpt}
                 </p>
-                <div className="mt-8 space-y-5 text-sm leading-6 text-zinc-300">
-                  {selectedPost.content.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
-                  ))}
-                </div>
+                <BlogContent
+                  content={selectedPost.content}
+                  className="mt-8 space-y-6 text-[0.95rem] leading-7 text-zinc-300"
+                />
               </section>
             ) : null}
           </div>

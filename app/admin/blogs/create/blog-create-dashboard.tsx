@@ -2,7 +2,11 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import {
+  BlogContent,
+  splitBlogContent,
+} from "../../../components/blog-content";
 import {
   createSlug,
   type EditablePost,
@@ -15,6 +19,7 @@ import {
 
 export function BlogCreateDashboard() {
   const router = useRouter();
+  const editorRef = useRef<HTMLTextAreaElement>(null);
   const [posts, setPosts] = useState<EditablePost[]>(getInitialPosts);
   const [isStorageReady, setIsStorageReady] = useState(false);
   const [form, setForm] = useState({
@@ -45,10 +50,7 @@ export function BlogCreateDashboard() {
   }, [isStorageReady, posts]);
 
   const previewPost = useMemo(() => {
-    const content = form.content
-      .split(/\n{2,}/)
-      .map((paragraph) => paragraph.trim())
-      .filter(Boolean);
+    const content = splitBlogContent(form.content);
 
     return {
       slug: createSlug(form.title),
@@ -62,6 +64,47 @@ export function BlogCreateDashboard() {
       status: "Draft" as const,
     };
   }, [form]);
+
+  function insertMarkdown(before: string, after = "", fallback = "") {
+    const editor = editorRef.current;
+    const selectedText =
+      editor?.value.slice(editor.selectionStart, editor.selectionEnd) ??
+      fallback;
+    const nextText = `${before}${selectedText || fallback}${after}`;
+
+    if (!editor) {
+      setForm((currentForm) => ({
+        ...currentForm,
+        content: `${currentForm.content}${nextText}`,
+      }));
+      return;
+    }
+
+    const start = editor.selectionStart;
+    const end = editor.selectionEnd;
+    const nextContent = `${form.content.slice(0, start)}${nextText}${form.content.slice(end)}`;
+
+    setForm((currentForm) => ({
+      ...currentForm,
+      content: nextContent,
+    }));
+
+    window.setTimeout(() => {
+      editor.focus();
+      editor.selectionStart = start + before.length;
+      editor.selectionEnd =
+        start + before.length + (selectedText || fallback).length;
+    }, 0);
+  }
+
+  function insertBlock(markdown: string) {
+    const separator = form.content.trim() ? "\n\n" : "";
+    setForm((currentForm) => ({
+      ...currentForm,
+      content: `${currentForm.content}${separator}${markdown}`,
+    }));
+    window.setTimeout(() => editorRef.current?.focus(), 0);
+  }
 
   function handlePublish(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -195,9 +238,100 @@ export function BlogCreateDashboard() {
                 />
               </label>
 
-              <label className="mt-4 block text-sm font-medium text-zinc-300">
-                Body
+              <div className="mt-4">
+                <label
+                  htmlFor="blog-body"
+                  className="block text-sm font-medium text-zinc-300"
+                >
+                  Body
+                </label>
+
+                <div className="mt-2 flex flex-wrap gap-2 border border-white/10 bg-black p-2">
+                  <button
+                    type="button"
+                    title="Heading"
+                    onClick={() => insertMarkdown("## ", "", "Section title")}
+                    className="min-h-9 min-w-9 border border-white/10 px-3 text-sm font-semibold text-zinc-300 transition-colors hover:border-[#e4db55]/50 hover:text-white"
+                  >
+                    H2
+                  </button>
+                  <button
+                    type="button"
+                    title="Bold"
+                    onClick={() => insertMarkdown("**", "**", "bold text")}
+                    className="min-h-9 min-w-9 border border-white/10 px-3 text-sm font-bold text-zinc-300 transition-colors hover:border-[#e4db55]/50 hover:text-white"
+                  >
+                    B
+                  </button>
+                  <button
+                    type="button"
+                    title="Italic"
+                    onClick={() => insertMarkdown("*", "*", "italic text")}
+                    className="min-h-9 min-w-9 border border-white/10 px-3 text-sm italic text-zinc-300 transition-colors hover:border-[#e4db55]/50 hover:text-white"
+                  >
+                    I
+                  </button>
+                  <button
+                    type="button"
+                    title="Inline code"
+                    onClick={() => insertMarkdown("`", "`", "code")}
+                    className="min-h-9 min-w-9 border border-white/10 px-3 font-mono text-sm text-zinc-300 transition-colors hover:border-[#e4db55]/50 hover:text-white"
+                  >
+                    {"</>"}
+                  </button>
+                  <button
+                    type="button"
+                    title="Link"
+                    onClick={() =>
+                      insertMarkdown("[", "](https://example.com)", "link text")
+                    }
+                    className="min-h-9 min-w-9 border border-white/10 px-3 text-sm text-zinc-300 transition-colors hover:border-[#e4db55]/50 hover:text-white"
+                  >
+                    Link
+                  </button>
+                  <button
+                    type="button"
+                    title="Image"
+                    onClick={() =>
+                      insertBlock("![Image description](/joseph.png)")
+                    }
+                    className="min-h-9 min-w-9 border border-white/10 px-3 text-sm text-zinc-300 transition-colors hover:border-[#e4db55]/50 hover:text-white"
+                  >
+                    Img
+                  </button>
+                  <button
+                    type="button"
+                    title="Code block"
+                    onClick={() =>
+                      insertBlock(
+                        '```json\n{\n  "compilerOptions": {\n    "target": "ES2020",\n    "module": "CommonJS",\n    "rootDir": "./src",\n    "outDir": "./dist",\n    "strict": true,\n    "esModuleInterop": true,\n    "skipLibCheck": true\n  }\n}\n```',
+                      )
+                    }
+                    className="min-h-9 min-w-9 border border-white/10 px-3 text-sm text-zinc-300 transition-colors hover:border-[#e4db55]/50 hover:text-white"
+                  >
+                    Code
+                  </button>
+                  <button
+                    type="button"
+                    title="Quote"
+                    onClick={() => insertMarkdown("> ", "", "Quoted idea")}
+                    className="min-h-9 min-w-9 border border-white/10 px-3 text-sm text-zinc-300 transition-colors hover:border-[#e4db55]/50 hover:text-white"
+                  >
+                    Quote
+                  </button>
+                  <button
+                    type="button"
+                    title="List"
+                    onClick={() => insertBlock("- First point\n- Second point")}
+                    className="min-h-9 min-w-9 border border-white/10 px-3 text-sm text-zinc-300 transition-colors hover:border-[#e4db55]/50 hover:text-white"
+                  >
+                    List
+                  </button>
+                </div>
+
                 <textarea
+                  id="blog-body"
+                  ref={editorRef}
                   value={form.content}
                   onChange={(event) =>
                     setForm((currentForm) => ({
@@ -205,11 +339,11 @@ export function BlogCreateDashboard() {
                       content: event.target.value,
                     }))
                   }
-                  className="mt-2 min-h-72 w-full resize-y border border-white/10 bg-black px-4 py-3 leading-7 text-white outline-none transition-colors focus:border-[#e4db55]/60"
-                  placeholder="Write paragraphs separated by a blank line."
+                  className="min-h-96 w-full resize-y border-x border-b border-white/10 bg-black px-4 py-3 font-mono text-sm leading-7 text-white outline-none transition-colors focus:border-[#e4db55]/60"
+                  placeholder="Write Markdown. Use blank lines between paragraphs."
                   required
                 />
-              </label>
+              </div>
 
               <div className="mt-5 flex flex-wrap items-center gap-3">
                 <button
@@ -239,15 +373,16 @@ export function BlogCreateDashboard() {
               <p className="mt-4 text-sm leading-6 text-zinc-400">
                 {previewPost.excerpt}
               </p>
-              <div className="mt-8 space-y-5 text-sm leading-6 text-zinc-300">
-                {previewPost.content.length > 0 ? (
-                  previewPost.content.map((paragraph) => (
-                    <p key={paragraph}>{paragraph}</p>
-                  ))
-                ) : (
-                  <p>Body preview appears here as you write.</p>
-                )}
-              </div>
+              {previewPost.content.length > 0 ? (
+                <BlogContent
+                  content={previewPost.content}
+                  className="mt-8 space-y-6 text-[0.95rem] leading-7 text-zinc-300"
+                />
+              ) : (
+                <p className="mt-8 text-sm leading-6 text-zinc-300">
+                  Body preview appears here as you write.
+                </p>
+              )}
             </article>
           </div>
         </div>

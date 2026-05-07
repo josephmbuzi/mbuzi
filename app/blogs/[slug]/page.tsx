@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BlogContent } from "../../components/blog-content";
 import { blogPosts, getBlogPost } from "../../lib/blogs";
 import { siteConfig } from "../../lib/site";
 
@@ -110,11 +111,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </p>
           </header>
 
-          <div className="mt-12 max-w-200 space-y-7 text-lg leading-8 text-zinc-300">
-            {post.content.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </div>
+          <BlogContent
+            content={post.content}
+            className="mt-14 max-w-200 space-y-9 text-[1.05rem] leading-8 text-zinc-300 sm:text-lg sm:leading-9"
+          />
 
           <footer className="mt-16 border-t border-white/10 pt-8">
             <Link
