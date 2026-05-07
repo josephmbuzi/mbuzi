@@ -16,6 +16,20 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Contact Form Email
+
+The services inquiry form sends email through Mailtrap. Add these variables to
+`.env.local` and to your production host:
+
+```bash
+MAILTRAP_API_TOKEN="..."
+CONTACT_FROM_EMAIL="inquiries@your-verified-domain.com"
+CONTACT_TO_EMAIL="josephmbuzi9@gmail.com"
+```
+
+`CONTACT_FROM_EMAIL` must use a sender domain verified in Mailtrap. Replies go
+to the visitor's email address from the form.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
