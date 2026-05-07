@@ -3,7 +3,9 @@ import { siteConfig } from "./lib/site";
 import { getBlogPostsFromSupabase } from "./lib/supabase-blogs";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const blogPosts = await getBlogPostsFromSupabase();
+  const blogPosts = await getBlogPostsFromSupabase({
+    fallbackToStatic: true,
+  });
   const routes: MetadataRoute.Sitemap = [
     {
       url: siteConfig.url,
