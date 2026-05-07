@@ -62,36 +62,6 @@ export default async function BlogsPage() {
             Joseph Mbuzi
           </Link>
 
-          <div className="mt-20 max-w-245 sm:mt-24">
-            <p className="text-3xl font-medium leading-[0.95] text-zinc-500 sm:text-4xl md:text-5xl lg:text-4xl">
-              Blogs
-            </p>
-            <p className="mt-8 max-w-210 text-lg leading-[1.45] text-zinc-300 sm:text-xl">
-              Notes and essays from Joseph Mbuzi on building scalable digital
-              platforms, improving operational workflows, and creating
-              developer experiences with structure.
-            </p>
-          </div>
-
-          <div className="mt-16 grid gap-4 md:grid-cols-3">
-            {blogTopics.map((topic) => (
-              <article
-                key={topic.title}
-                className="border border-white/10 bg-zinc-950/70 p-5"
-              >
-                <p className="text-xs font-semibold uppercase text-[#e4db55]">
-                  {topic.eyebrow}
-                </p>
-                <h2 className="mt-8 text-2xl font-medium leading-tight text-white">
-                  {topic.title}
-                </h2>
-                <p className="mt-4 text-sm leading-6 text-zinc-400">
-                  {topic.description}
-                </p>
-              </article>
-            ))}
-          </div>
-
           <section className="mt-20 border-t border-white/10 pt-10">
             {blogPosts.length > 0 ? (
               <div className="grid gap-4 md:grid-cols-2">
