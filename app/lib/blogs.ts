@@ -1,3 +1,14 @@
+export type BlogPost = {
+  slug: string;
+  title: string;
+  date: string;
+  publishedAt: string;
+  readTime: string;
+  category: string;
+  excerpt: string;
+  content: string[];
+};
+
 export const blogTopics = [
   {
     title: "Systems notes",
@@ -19,7 +30,7 @@ export const blogTopics = [
   },
 ];
 
-export const blogPosts = [
+export const blogPosts: BlogPost[] = [
   {
     slug: "designing-systems-that-outlive-busy-weeks",
     title: "Designing systems that outlive busy weeks",
