@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { ContactForm } from "./contact-form";
-import { siteConfig } from "../lib/site";
+import { siteConfig } from "../../lib/site";
 
 export const metadata: Metadata = {
   title: "Services",

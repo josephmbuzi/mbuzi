@@ -1,5 +1,5 @@
-import { Hero } from "./components/hero";
-import { siteConfig } from "./lib/site";
+import { Hero } from "../components/hero";
+import { siteConfig } from "../lib/site";
 
 const personJsonLd = {
   "@context": "https://schema.org",

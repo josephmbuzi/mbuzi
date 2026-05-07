@@ -115,13 +115,6 @@ export function BlogAdminDashboard() {
               >
                 Sign out
               </button>
-              <button
-                type="button"
-                onClick={handleReset}
-                className="border border-white/10 px-4 py-2 text-sm font-medium text-zinc-300 transition-colors hover:border-[#e4db55]/50 hover:text-white"
-              >
-                Reset local posts
-              </button>
               <Link
                 href="/admin/blogs/create"
                 className="bg-[#e4db55] px-4 py-2 text-sm font-semibold text-black transition-colors hover:bg-white"
@@ -130,15 +123,6 @@ export function BlogAdminDashboard() {
               </Link>
             </div>
           </div>
-
-          <header className="mt-14 max-w-245">
-            <p className="text-3xl font-medium leading-[0.95] text-zinc-500 sm:text-4xl">
-              Admin
-            </p>
-            <h1 className="mt-5 text-4xl font-medium leading-[0.95] text-white sm:text-6xl md:text-7xl">
-              Publish and manage blog posts.
-            </h1>
-          </header>
 
           <div className="mt-12 grid gap-5 lg:grid-cols-[0.8fr_1.2fr]">
             <aside className="border border-white/10 bg-white/[0.03]">
@@ -183,12 +167,20 @@ export function BlogAdminDashboard() {
                       {selectedPost.title}
                     </h2>
                   </div>
-                  <Link
-                    href={`/blogs/${selectedPost.slug}`}
-                    className="border border-white/10 px-4 py-2 text-sm font-medium text-zinc-300 transition-colors hover:border-[#e4db55]/50 hover:text-white"
-                  >
-                    View post
-                  </Link>
+                  <div className="flex flex-wrap items-center gap-3">
+                    <Link
+                      href={`/admin/blogs/${selectedPost.slug}/edit`}
+                      className="bg-[#e4db55] px-4 py-2 text-sm font-semibold text-black transition-colors hover:bg-white"
+                    >
+                      Edit post
+                    </Link>
+                    <Link
+                      href={`/blogs/${selectedPost.slug}`}
+                      className="border border-white/10 px-4 py-2 text-sm font-medium text-zinc-300 transition-colors hover:border-[#e4db55]/50 hover:text-white"
+                    >
+                      View post
+                    </Link>
+                  </div>
                 </div>
                 <p className="mt-4 max-w-245 text-sm leading-6 text-zinc-400">
                   {selectedPost.excerpt}

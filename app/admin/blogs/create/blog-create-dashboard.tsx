@@ -7,7 +7,12 @@ import {
   BlogContent,
   splitBlogContent,
 } from "../../../components/blog-content";
-import { saveBlogPostToSupabase } from "../../../lib/supabase-blogs";
+import {
+  fallbackBlogCategories,
+  getBlogCategoriesFromSupabase,
+  saveBlogPostToSupabase,
+  type BlogCategory,
+} from "../../../lib/supabase-blogs";
 import {
   getStoredAdminSession,
   type SupabaseAuthSession,
@@ -28,6 +33,9 @@ export function BlogCreateDashboard() {
   const [posts, setPosts] = useState<EditablePost[]>(getInitialPosts);
   const [isStorageReady, setIsStorageReady] = useState(false);
   const [session, setSession] = useState<SupabaseAuthSession | null>(null);
+  const [categories, setCategories] = useState<BlogCategory[]>(
+    fallbackBlogCategories,
+  );
   const [saveError, setSaveError] = useState("");
   const [isPublishing, setIsPublishing] = useState(false);
   const [form, setForm] = useState({
@@ -65,6 +73,42 @@ export function BlogCreateDashboard() {
 
     window.localStorage.setItem(storageKey, JSON.stringify(posts));
   }, [isStorageReady, posts]);
+
+  useEffect(() => {
+    if (!session) {
+      return;
+    }
+
+    let isCurrent = true;
+
+    async function loadCategories() {
+      const supabaseCategories = await getBlogCategoriesFromSupabase(
+        session?.accessToken,
+      );
+
+      if (!isCurrent) {
+        return;
+      }
+
+      setCategories(supabaseCategories);
+
+      if (
+        supabaseCategories.length > 0 &&
+        !supabaseCategories.some((category) => category.name === form.category)
+      ) {
+        setForm((currentForm) => ({
+          ...currentForm,
+          category: supabaseCategories[0].name,
+        }));
+      }
+    }
+
+    loadCategories();
+
+    return () => {
+      isCurrent = false;
+    };
+  }, [form.category, session]);
 
   const previewPost = useMemo(() => {
     const content = splitBlogContent(form.content);
@@ -243,10 +287,11 @@ export function BlogCreateDashboard() {
                     }
                     className="mt-2 w-full border border-white/10 bg-black px-4 py-3 text-white outline-none transition-colors focus:border-[#e4db55]/60"
                   >
-                    <option>Systems</option>
-                    <option>Automation</option>
-                    <option>Developer Experience</option>
-                    <option>Product Engineering</option>
+                    {categories.map((category) => (
+                      <option key={category.name} value={category.name}>
+                        {category.name}
+                      </option>
+                    ))}
                   </select>
                 </label>
 

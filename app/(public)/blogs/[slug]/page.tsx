@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { BlogContent } from "../../components/blog-content";
-import { siteConfig } from "../../lib/site";
+import { BlogContent } from "../../../components/blog-content";
+import { siteConfig } from "../../../lib/site";
 import {
   getBlogPostFromSupabase,
   getBlogPostsFromSupabase,
-} from "../../lib/supabase-blogs";
+} from "../../../lib/supabase-blogs";
 
 type BlogPostPageProps = {
   params: Promise<{

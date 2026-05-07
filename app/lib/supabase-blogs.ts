@@ -6,6 +6,10 @@ export type StoredBlogPost = BlogPost & {
   status: BlogPostStatus;
 };
 
+export type BlogCategory = {
+  name: string;
+};
+
 type SupabaseBlogRow = {
   slug: string;
   title: string;
@@ -16,6 +20,10 @@ type SupabaseBlogRow = {
   seo_description: string | null;
   content: string[];
   status: BlogPostStatus;
+};
+
+type SupabaseBlogCategoryRow = {
+  name: string;
 };
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -84,9 +92,44 @@ function fallbackPosts(): StoredBlogPost[] {
   }));
 }
 
+export const fallbackBlogCategories: BlogCategory[] = [
+  { name: "Systems" },
+  { name: "Automation" },
+  { name: "Developer Experience" },
+  { name: "Product Engineering" },
+];
+
+export async function getBlogCategoriesFromSupabase(accessToken?: string) {
+  const endpoint = getSupabaseEndpoint(
+    "blog_categories?select=name&is_active=eq.true&order=display_order.asc,name.asc",
+  );
+  const headers = getSupabaseHeaders(accessToken);
+
+  if (!endpoint || !headers) {
+    return fallbackBlogCategories;
+  }
+
+  try {
+    const response = await fetch(endpoint, {
+      headers,
+      cache: "no-store",
+    });
+
+    if (!response.ok) {
+      return fallbackBlogCategories;
+    }
+
+    const rows = (await response.json()) as SupabaseBlogCategoryRow[];
+    return rows.length > 0 ? rows : fallbackBlogCategories;
+  } catch {
+    return fallbackBlogCategories;
+  }
+}
+
 export async function getBlogPostsFromSupabase(options?: {
   includeDrafts?: boolean;
   accessToken?: string;
+  fallbackToStatic?: boolean;
 }) {
   const endpoint = getSupabaseEndpoint(
     `blogs?select=${blogColumns}${
@@ -96,7 +139,7 @@ export async function getBlogPostsFromSupabase(options?: {
   const headers = getSupabaseHeaders(options?.accessToken);
 
   if (!endpoint || !headers) {
-    return fallbackPosts();
+    return options?.fallbackToStatic ? fallbackPosts() : [];
   }
 
   try {
@@ -106,17 +149,26 @@ export async function getBlogPostsFromSupabase(options?: {
     });
 
     if (!response.ok) {
-      return fallbackPosts();
+      return options?.fallbackToStatic ? fallbackPosts() : [];
     }
 
     const rows = (await response.json()) as SupabaseBlogRow[];
-    return rows.length > 0 ? rows.map(mapRowToPost) : fallbackPosts();
+    return rows.length > 0
+      ? rows.map(mapRowToPost)
+      : options?.fallbackToStatic
+        ? fallbackPosts()
+        : [];
   } catch {
-    return fallbackPosts();
+    return options?.fallbackToStatic ? fallbackPosts() : [];
   }
 }
 
-export async function getBlogPostFromSupabase(slug: string) {
+export async function getBlogPostFromSupabase(
+  slug: string,
+  options?: {
+    fallbackToStatic?: boolean;
+  },
+) {
   const endpoint = getSupabaseEndpoint(
     `blogs?select=${blogColumns}&slug=eq.${encodeURIComponent(
       slug,
@@ -125,7 +177,9 @@ export async function getBlogPostFromSupabase(slug: string) {
   const headers = getSupabaseHeaders();
 
   if (!endpoint || !headers) {
-    return fallbackPosts().find((post) => post.slug === slug);
+    return options?.fallbackToStatic
+      ? fallbackPosts().find((post) => post.slug === slug)
+      : undefined;
   }
 
   try {
@@ -135,13 +189,47 @@ export async function getBlogPostFromSupabase(slug: string) {
     });
 
     if (!response.ok) {
-      return fallbackPosts().find((post) => post.slug === slug);
+      return options?.fallbackToStatic
+        ? fallbackPosts().find((post) => post.slug === slug)
+        : undefined;
     }
 
     const rows = (await response.json()) as SupabaseBlogRow[];
     return rows[0] ? mapRowToPost(rows[0]) : undefined;
   } catch {
-    return fallbackPosts().find((post) => post.slug === slug);
+    return options?.fallbackToStatic
+      ? fallbackPosts().find((post) => post.slug === slug)
+      : undefined;
+  }
+}
+
+export async function getAdminBlogPostFromSupabase(
+  slug: string,
+  accessToken: string,
+) {
+  const endpoint = getSupabaseEndpoint(
+    `blogs?select=${blogColumns}&slug=eq.${encodeURIComponent(slug)}&limit=1`,
+  );
+  const headers = getSupabaseHeaders(accessToken);
+
+  if (!endpoint || !headers || !accessToken) {
+    return undefined;
+  }
+
+  try {
+    const response = await fetch(endpoint, {
+      headers,
+      cache: "no-store",
+    });
+
+    if (!response.ok) {
+      return undefined;
+    }
+
+    const rows = (await response.json()) as SupabaseBlogRow[];
+    return rows[0] ? mapRowToPost(rows[0]) : undefined;
+  } catch {
+    return undefined;
   }
 }
 
@@ -175,5 +263,46 @@ export async function saveBlogPostToSupabase(
   }
 
   const rows = (await response.json()) as SupabaseBlogRow[];
+  return mapRowToPost(rows[0]);
+}
+
+export async function updateBlogPostInSupabase(
+  originalSlug: string,
+  post: StoredBlogPost,
+  accessToken: string,
+) {
+  const endpoint = getSupabaseEndpoint(
+    `blogs?slug=eq.${encodeURIComponent(originalSlug)}`,
+  );
+  const headers = getSupabaseHeaders(accessToken);
+
+  if (!endpoint || !headers) {
+    throw new Error("Supabase environment variables are not configured.");
+  }
+
+  if (!accessToken) {
+    throw new Error("Sign in before updating a blog post.");
+  }
+
+  const response = await fetch(endpoint, {
+    method: "PATCH",
+    headers: {
+      ...headers,
+      Prefer: "return=representation",
+    },
+    body: JSON.stringify(mapPostToRow(post)),
+  });
+
+  if (!response.ok) {
+    const message = await response.text();
+    throw new Error(message || "Failed to update blog post in Supabase.");
+  }
+
+  const rows = (await response.json()) as SupabaseBlogRow[];
+
+  if (!rows[0]) {
+    throw new Error("Blog post was not found.");
+  }
+
   return mapRowToPost(rows[0]);
 }

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { blogTopics } from "../lib/blogs";
-import { siteConfig } from "../lib/site";
-import { getBlogPostsFromSupabase } from "../lib/supabase-blogs";
+import { blogTopics } from "../../lib/blogs";
+import { siteConfig } from "../../lib/site";
+import { getBlogPostsFromSupabase } from "../../lib/supabase-blogs";
 
 export const metadata: Metadata = {
   title: "Blogs",
@@ -93,27 +93,33 @@ export default async function BlogsPage() {
           </div>
 
           <section className="mt-20 border-t border-white/10 pt-10">
-            <div className="grid gap-4 md:grid-cols-2">
-              {blogPosts.map((post) => (
-                <Link
-                  key={post.title}
-                  href={`/blogs/${post.slug}`}
-                  className="group border border-white/10 bg-white/[0.03] p-5 transition-colors hover:border-[#e4db55]/50"
-                >
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs font-semibold uppercase text-zinc-500">
-                    <span className="text-[#e4db55]">{post.category}</span>
-                    <span>{post.date}</span>
-                    <span>{post.readTime}</span>
-                  </div>
-                  <h3 className="mt-5 text-2xl font-medium leading-tight text-white transition-colors group-hover:text-[#e4db55]">
-                    {post.title}
-                  </h3>
-                  <p className="mt-4 text-sm leading-6 text-zinc-400">
-                    {post.excerpt}
-                  </p>
-                </Link>
-              ))}
-            </div>
+            {blogPosts.length > 0 ? (
+              <div className="grid gap-4 md:grid-cols-2">
+                {blogPosts.map((post) => (
+                  <Link
+                    key={post.title}
+                    href={`/blogs/${post.slug}`}
+                    className="group border border-white/10 bg-white/[0.03] p-5 transition-colors hover:border-[#e4db55]/50"
+                  >
+                    <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs font-semibold uppercase text-zinc-500">
+                      <span className="text-[#e4db55]">{post.category}</span>
+                      <span>{post.date}</span>
+                      <span>{post.readTime}</span>
+                    </div>
+                    <h3 className="mt-5 text-2xl font-medium leading-tight text-white transition-colors group-hover:text-[#e4db55]">
+                      {post.title}
+                    </h3>
+                    <p className="mt-4 text-sm leading-6 text-zinc-400">
+                      {post.excerpt}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <p className="max-w-180 text-sm leading-6 text-zinc-500">
+                No published blog posts are available yet.
+              </p>
+            )}
           </section>
         </div>
       </section>

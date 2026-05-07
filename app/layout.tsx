@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Navbar } from "./components/navbar";
 import { siteConfig } from "./lib/site";
 import "./globals.css";
 
@@ -69,7 +68,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full antialiased">
       <body className="min-h-full bg-black text-white">
-        <Navbar />
         {children}
       </body>
     </html>
