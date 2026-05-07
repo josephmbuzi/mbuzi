@@ -18,6 +18,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
       images: [`${siteConfig.url}${siteConfig.image}`],
     },
+    {
+      url: `${siteConfig.url}/services`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+      images: [`${siteConfig.url}${siteConfig.image}`],
+    },
   ];
 
   return [

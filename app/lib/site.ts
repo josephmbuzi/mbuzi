@@ -6,6 +6,7 @@ export const siteConfig = {
   url: "https://mbuzi.bio",
   locale: "en_US",
   image: "/joseph.png",
+  email: "josephmbuzi9@gmail.com",
   links: {
     github: "https://github.com/josephmbuzi",
     medium: "https://medium.com/@josephmbuzi9",

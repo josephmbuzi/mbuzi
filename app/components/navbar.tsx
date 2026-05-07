@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 const navItems = [
+  { label: "Services", href: "/services" },
   { label: "Blogs", href: "/blogs" },
   { label: "GitHub", href: "https://github.com/josephmbuzi" },
 ];
@@ -23,6 +24,12 @@ export function Navbar() {
             </Link>
           ))}
         </div>
+        <Link
+          href="/services#contact"
+          className="inline-flex min-h-10 items-center justify-center border border-[#e4db55]/70 bg-[#e4db55] px-4 text-sm font-semibold text-black transition-colors hover:bg-white"
+        >
+          Send inquiry
+        </Link>
       </nav>
     </header>
   );
