@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { blogPosts, blogTopics } from "../lib/blogs";
+import { blogTopics } from "../lib/blogs";
 import { siteConfig } from "../lib/site";
+import { getBlogPostsFromSupabase } from "../lib/supabase-blogs";
 
 export const metadata: Metadata = {
   title: "Blogs",
@@ -39,7 +40,9 @@ const blogJsonLd = {
   },
 };
 
-export default function BlogsPage() {
+export default async function BlogsPage() {
+  const blogPosts = await getBlogPostsFromSupabase();
+
   return (
     <main className="min-h-screen bg-black text-white">
       <script
@@ -63,9 +66,6 @@ export default function BlogsPage() {
             <p className="text-3xl font-medium leading-[0.95] text-zinc-500 sm:text-4xl md:text-5xl lg:text-4xl">
               Blogs
             </p>
-            <h1 className="mt-6 text-4xl font-medium leading-[0.95] text-white sm:text-6xl md:text-7xl lg:text-8xl">
-              Writing on systems, products, and practical engineering.
-            </h1>
             <p className="mt-8 max-w-210 text-lg leading-[1.45] text-zinc-300 sm:text-xl">
               Notes and essays from Joseph Mbuzi on building scalable digital
               platforms, improving operational workflows, and creating

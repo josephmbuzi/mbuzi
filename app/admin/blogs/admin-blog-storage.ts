@@ -1,7 +1,8 @@
 import { blogPosts, type BlogPost } from "../../lib/blogs";
+import type { BlogPostStatus } from "../../lib/supabase-blogs";
 
 export type EditablePost = BlogPost & {
-  status: "Published" | "Draft";
+  status: BlogPostStatus;
 };
 
 export const storageKey = "mbuzi-blog-admin-posts";

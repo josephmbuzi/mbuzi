@@ -1,8 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { BlogContent } from "../../components/blog-content";
+import { getBlogPostsFromSupabase } from "../../lib/supabase-blogs";
+import {
+  clearAdminSession,
+  getStoredAdminSession,
+  type SupabaseAuthSession,
+} from "../../lib/supabase-auth";
 import {
   type EditablePost,
   getInitialPosts,
@@ -10,13 +17,24 @@ import {
 } from "./admin-blog-storage";
 
 export function BlogAdminDashboard() {
+  const router = useRouter();
   const [posts, setPosts] = useState<EditablePost[]>(getInitialPosts);
   const [selectedSlug, setSelectedSlug] = useState(
     getInitialPosts()[0]?.slug ?? "",
   );
+  const [session, setSession] = useState<SupabaseAuthSession | null>(null);
 
   useEffect(() => {
     const timeout = window.setTimeout(() => {
+      const storedSession = getStoredAdminSession();
+
+      if (!storedSession) {
+        router.replace("/admin/login");
+        return;
+      }
+
+      setSession(storedSession);
+
       const savedPosts = window.localStorage.getItem(storageKey);
 
       if (savedPosts) {
@@ -27,7 +45,36 @@ export function BlogAdminDashboard() {
     }, 0);
 
     return () => window.clearTimeout(timeout);
-  }, []);
+  }, [router]);
+
+  useEffect(() => {
+    let isCurrent = true;
+
+    async function loadSupabasePosts() {
+      if (!session) {
+        return;
+      }
+
+      const supabasePosts = await getBlogPostsFromSupabase({
+        includeDrafts: true,
+        accessToken: session.accessToken,
+      });
+
+      if (!isCurrent) {
+        return;
+      }
+
+      setPosts(supabasePosts);
+      setSelectedSlug(supabasePosts[0]?.slug ?? "");
+      window.localStorage.setItem(storageKey, JSON.stringify(supabasePosts));
+    }
+
+    loadSupabasePosts();
+
+    return () => {
+      isCurrent = false;
+    };
+  }, [session]);
 
   const selectedPost = useMemo(
     () => posts.find((post) => post.slug === selectedSlug) ?? posts[0],
@@ -39,6 +86,11 @@ export function BlogAdminDashboard() {
     setPosts(initialPosts);
     setSelectedSlug(initialPosts[0]?.slug ?? "");
     window.localStorage.removeItem(storageKey);
+  }
+
+  function handleSignOut() {
+    clearAdminSession();
+    router.replace("/admin/login");
   }
 
   return (
@@ -56,6 +108,13 @@ export function BlogAdminDashboard() {
               Blogs
             </Link>
             <div className="flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                onClick={handleSignOut}
+                className="border border-white/10 px-4 py-2 text-sm font-medium text-zinc-300 transition-colors hover:border-[#e4db55]/50 hover:text-white"
+              >
+                Sign out
+              </button>
               <button
                 type="button"
                 onClick={handleReset}

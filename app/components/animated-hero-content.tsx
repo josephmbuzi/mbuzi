@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+import Link from "next/link";
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -65,16 +66,15 @@ export function AnimatedHeroContent() {
         <Highlight>blog</Highlight>.
       </motion.p>
 
-      {/* <motion.div variants={itemVariants} className="mt-8 mb-3">
+      <motion.div variants={itemVariants} className="mt-8 mb-3">
         <Link
-          href="https://medium.com/@josephmbuzi9"
-          target="_blank"
+          href="/blogs"
           rel="noreferrer"
           className="inline-flex min-h-11 items-center justify-center rounded-full border border-[#e4db55]/60 bg-[#e4db55] px-5 text-sm font-semibold text-black transition-colors hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#e4db55] focus:ring-offset-2 focus:ring-offset-black"
         >
           Read the blog
         </Link>
-      </motion.div> */}
+      </motion.div>
     </motion.div>
   );
 }

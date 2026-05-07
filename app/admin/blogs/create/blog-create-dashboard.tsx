@@ -7,6 +7,11 @@ import {
   BlogContent,
   splitBlogContent,
 } from "../../../components/blog-content";
+import { saveBlogPostToSupabase } from "../../../lib/supabase-blogs";
+import {
+  getStoredAdminSession,
+  type SupabaseAuthSession,
+} from "../../../lib/supabase-auth";
 import {
   createSlug,
   type EditablePost,
@@ -22,6 +27,9 @@ export function BlogCreateDashboard() {
   const editorRef = useRef<HTMLTextAreaElement>(null);
   const [posts, setPosts] = useState<EditablePost[]>(getInitialPosts);
   const [isStorageReady, setIsStorageReady] = useState(false);
+  const [session, setSession] = useState<SupabaseAuthSession | null>(null);
+  const [saveError, setSaveError] = useState("");
+  const [isPublishing, setIsPublishing] = useState(false);
   const [form, setForm] = useState({
     ...emptyPost,
     publishedAt: new Date().toISOString().slice(0, 10),
@@ -29,6 +37,15 @@ export function BlogCreateDashboard() {
 
   useEffect(() => {
     const timeout = window.setTimeout(() => {
+      const storedSession = getStoredAdminSession();
+
+      if (!storedSession) {
+        router.replace("/admin/login");
+        return;
+      }
+
+      setSession(storedSession);
+
       const savedPosts = window.localStorage.getItem(storageKey);
 
       if (savedPosts) {
@@ -39,7 +56,7 @@ export function BlogCreateDashboard() {
     }, 0);
 
     return () => window.clearTimeout(timeout);
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     if (!isStorageReady) {
@@ -111,8 +128,9 @@ export function BlogCreateDashboard() {
     window.setTimeout(() => editorRef.current?.focus(), 0);
   }
 
-  function handlePublish(event: FormEvent<HTMLFormElement>) {
+  async function handlePublish(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setSaveError("");
 
     const slug = previewPost.slug;
 
@@ -125,14 +143,35 @@ export function BlogCreateDashboard() {
       status: "Published",
     };
 
-    const nextPosts = [
-      nextPost,
-      ...posts.filter((post) => post.slug !== slug),
-    ];
+    setIsPublishing(true);
 
-    setPosts(nextPosts);
-    window.localStorage.setItem(storageKey, JSON.stringify(nextPosts));
-    router.push("/admin/blogs");
+    try {
+      if (!session) {
+        router.replace("/admin/login");
+        return;
+      }
+
+      const savedPost = await saveBlogPostToSupabase(
+        nextPost,
+        session.accessToken,
+      );
+      const nextPosts = [
+        savedPost,
+        ...posts.filter((post) => post.slug !== slug),
+      ];
+
+      setPosts(nextPosts);
+      window.localStorage.setItem(storageKey, JSON.stringify(nextPosts));
+      router.push("/admin/blogs");
+    } catch (error) {
+      setSaveError(
+        error instanceof Error
+          ? error.message
+          : "Failed to save blog post to Supabase.",
+      );
+    } finally {
+      setIsPublishing(false);
+    }
   }
 
   return (
@@ -372,14 +411,20 @@ export function BlogCreateDashboard() {
               <div className="mt-5 flex flex-wrap items-center gap-3">
                 <button
                   type="submit"
+                  disabled={isPublishing}
                   className="bg-[#e4db55] px-5 py-3 text-sm font-semibold text-black transition-colors hover:bg-white"
                 >
-                  Publish locally
+                  {isPublishing ? "Publishing..." : "Publish to Supabase"}
                 </button>
                 <span className="text-sm text-zinc-500">
                   Slug: {previewPost.slug || "post-slug"}
                 </span>
               </div>
+              {saveError ? (
+                <p className="mt-4 text-sm leading-6 text-red-300">
+                  {saveError}
+                </p>
+              ) : null}
             </form>
 
             <article className="border border-white/10 bg-white/[0.03] p-5">

@@ -1,8 +1,9 @@
 import type { MetadataRoute } from "next";
-import { blogPosts } from "./lib/blogs";
 import { siteConfig } from "./lib/site";
+import { getBlogPostsFromSupabase } from "./lib/supabase-blogs";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const blogPosts = await getBlogPostsFromSupabase();
   const routes: MetadataRoute.Sitemap = [
     {
       url: siteConfig.url,
