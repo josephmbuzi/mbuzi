@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 
 const containerVariants: Variants = {
@@ -39,14 +38,14 @@ export function AnimatedHeroContent() {
         variants={itemVariants}
         className="mt-24 text-3xl font-medium leading-[0.95] tracking-[-0.01em] text-zinc-500 sm:mt-26 sm:text-4xl md:mt-28 md:text-5xl lg:text-4xl"
       >
-        Systems engineer
+        Software engineer
       </motion.p>
 
       <motion.p
         variants={itemVariants}
         className="mt-6 max-w-280 text-lg leading-[1.35] text-zinc-100 sm:text-xl md:text-2xl lg:text-[1.25rem]"
       >
-        Joseph Mbuzi is a <Highlight>Systems Engineer</Highlight> focused on
+        Joseph Mbuzi is a <Highlight>Software Engineer</Highlight> focused on
         building scalable digital platforms that help startups and institutions
         operate with clarity and structure.
         <br />
@@ -66,7 +65,7 @@ export function AnimatedHeroContent() {
         <Highlight>blog</Highlight>.
       </motion.p>
 
-      <motion.div variants={itemVariants} className="mt-8 mb-3">
+      {/* <motion.div variants={itemVariants} className="mt-8 mb-3">
         <Link
           href="https://medium.com/@josephmbuzi9"
           target="_blank"
@@ -75,7 +74,7 @@ export function AnimatedHeroContent() {
         >
           Read the blog
         </Link>
-      </motion.div>
+      </motion.div> */}
     </motion.div>
   );
 }

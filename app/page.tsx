@@ -7,7 +7,7 @@ const personJsonLd = {
   name: siteConfig.name,
   url: siteConfig.url,
   image: `${siteConfig.url}${siteConfig.image}`,
-  jobTitle: "Systems Engineer",
+  jobTitle: "Software Engineer",
   description: siteConfig.description,
   sameAs: [
     siteConfig.links.github,
@@ -15,7 +15,7 @@ const personJsonLd = {
     siteConfig.links.quora,
   ],
   knowsAbout: [
-    "Systems engineering",
+    "Software engineering",
     "Business automation",
     "Developer experience",
     "Digital platforms",

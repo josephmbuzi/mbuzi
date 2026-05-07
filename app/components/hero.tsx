@@ -10,7 +10,7 @@ export function Hero() {
       <div className="absolute right-0 top-22 z-0 h-[34vh] w-full opacity-60 sm:top-24 sm:h-[42vh] lg:h-[52vh] lg:w-[49vw] lg:opacity-80">
         <Image
           src="/joseph.png"
-          alt="Joseph Mbuzi, systems engineer building scalable digital platforms"
+          alt="Joseph Mbuzi, software engineer building scalable digital platforms"
           fill
           priority
           sizes="(min-width: 1024px) 49vw, 100vw"

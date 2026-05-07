@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   publisher: siteConfig.name,
   keywords: [
     "Joseph Mbuzi",
-    "systems engineer",
+    "software engineer",
     "business automation",
     "developer experience",
     "digital platforms",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
         url: siteConfig.image,
         width: 1672,
         height: 941,
-        alt: "Joseph Mbuzi, systems engineer building scalable digital platforms",
+        alt: "Joseph Mbuzi, software engineer building scalable digital platforms",
       },
     ],
   },

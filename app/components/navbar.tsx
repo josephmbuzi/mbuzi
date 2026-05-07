@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 const navItems = [
+  { label: "Blogs", href: "/blogs" },
   { label: "GitHub", href: "https://github.com/josephmbuzi" },
 ];
 
