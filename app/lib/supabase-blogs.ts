@@ -18,7 +18,7 @@ type SupabaseBlogRow = {
   category: string;
   excerpt: string;
   seo_description: string | null;
-  content: string[];
+  content: unknown;
   status: BlogPostStatus;
 };
 
@@ -53,22 +53,64 @@ function getSupabaseEndpoint(path: string) {
 }
 
 function mapRowToPost(row: SupabaseBlogRow): StoredBlogPost {
+  const publishedAt = normalizePublishedAt(row.published_at);
+
   return {
     slug: row.slug,
     title: row.title,
-    date: new Intl.DateTimeFormat("en", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    }).format(new Date(`${row.published_at}T00:00:00`)),
-    publishedAt: row.published_at,
+    date: formatDisplayDate(publishedAt),
+    publishedAt,
     readTime: row.read_time,
     category: row.category,
     excerpt: row.excerpt,
     seoDescription: row.seo_description ?? undefined,
-    content: row.content,
+    content: normalizeContent(row.content),
     status: row.status,
   };
+}
+
+function normalizePublishedAt(value: string) {
+  if (/^\d{4}-\d{2}-\d{2}/.test(value)) {
+    return value.slice(0, 10);
+  }
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+
+  return date.toISOString().slice(0, 10);
+}
+
+function formatDisplayDate(value: string) {
+  const date = new Date(`${value.slice(0, 10)}T00:00:00Z`);
+
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+
+  return new Intl.DateTimeFormat("en", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(date);
+}
+
+function normalizeContent(value: unknown) {
+  if (Array.isArray(value)) {
+    return value.filter((block): block is string => typeof block === "string");
+  }
+
+  if (typeof value === "string") {
+    return value
+      .split(/\n{2,}/)
+      .map((block) => block.trim())
+      .filter(Boolean);
+  }
+
+  return [];
 }
 
 function mapPostToRow(post: StoredBlogPost): SupabaseBlogRow {

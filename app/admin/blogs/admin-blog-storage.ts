@@ -24,11 +24,18 @@ export function createSlug(title: string) {
 }
 
 export function formatDisplayDate(value: string) {
+  const date = new Date(`${value.slice(0, 10)}T00:00:00Z`);
+
+  if (Number.isNaN(date.getTime())) {
+    return value;
+  }
+
   return new Intl.DateTimeFormat("en", {
     month: "long",
     day: "numeric",
     year: "numeric",
-  }).format(new Date(`${value}T00:00:00`));
+    timeZone: "UTC",
+  }).format(date);
 }
 
 export function estimateReadTime(content: string) {
