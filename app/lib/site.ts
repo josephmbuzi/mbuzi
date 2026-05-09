@@ -1,3 +1,16 @@
+const whatsappMessage = [
+  "Hi Joseph, I came from mbuzi.bio.",
+  "",
+  "I want help with:",
+  "- Web platform engineering",
+  "- Workflow automation",
+  "- DevOps and delivery support",
+  "- Improving an existing system",
+  "- Planning a technical direction",
+  "",
+  "My project context is:",
+].join("\n");
+
 export const siteConfig = {
   name: "Joseph Mbuzi",
   title: "Joseph Mbuzi | Software Engineer & Consultant",
@@ -7,6 +20,9 @@ export const siteConfig = {
   locale: "en_US",
   image: "/joseph.png",
   email: "josephmbuzi9@gmail.com",
+  whatsapp: `https://wa.me/260960707284?text=${encodeURIComponent(
+    whatsappMessage,
+  )}`,
   location: {
     country: "ZM",
     region: "Lusaka",
