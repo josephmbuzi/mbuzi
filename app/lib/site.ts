@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: "Joseph Mbuzi",
-  title: "Joseph Mbuzi | Software Engineer",
+  title: "Joseph Mbuzi | Software Consultant",
   description:
-    "Joseph Mbuzi is a software engineer building scalable digital platforms, business automation, and practical developer experiences.",
+    "Joseph Mbuzi is an independent software consultant helping teams build scalable digital platforms, automate business workflows, and ship maintainable product systems.",
   url: "https://mbuzi.bio",
   locale: "en_US",
   image: "/joseph.png",

@@ -33,46 +33,63 @@ export function AnimatedHeroContent() {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="max-w-250"
+      className="max-w-280"
     >
       <motion.p
         variants={itemVariants}
-        className="mt-24 text-3xl font-medium leading-[0.95] tracking-[-0.01em] text-zinc-500 sm:mt-26 sm:text-4xl md:mt-28 md:text-5xl lg:text-4xl"
+        className="mt-24 text-sm font-semibold uppercase tracking-[0.18em] text-[#e4db55] sm:mt-26 md:mt-28"
       >
-        Software engineer
+        Software consultant
       </motion.p>
+
+      <motion.h1
+        variants={itemVariants}
+        className="mt-5 max-w-250 text-5xl font-medium leading-[0.92] text-white sm:text-6xl md:text-7xl lg:text-8xl"
+      >
+        I turn messy workflows into reliable digital systems.
+      </motion.h1>
 
       <motion.p
         variants={itemVariants}
-        className="mt-6 max-w-280 text-lg leading-[1.35] text-zinc-100 sm:text-xl md:text-2xl lg:text-[1.25rem]"
+        className="mt-7 max-w-210 text-lg leading-8 text-zinc-300 sm:text-xl"
       >
-        Joseph Mbuzi is a <Highlight>Software Engineer</Highlight> focused on
-        building scalable digital platforms that help startups and institutions
-        operate with clarity and structure.
-        <br />
-        <br />
-        His work spans product, engineering, and developer relations, with a
-        practical interest in <Highlight>business automation</Highlight> and
-        thoughtful developer experience.
-        <br />
-        <br />
-        After years of building web applications — across{" "}
-        <Highlight>branding</Highlight>, tooling, and reliable product delivery
-        — he now operates at the intersection of technical strategy, engineering
-        practice, and product communication.
-        <br />
-        <br />
-        He shares insights, projects, and thinking through his{" "}
-        <Highlight>blog</Highlight>.
+        Joseph Mbuzi helps founders, institutions, and lean teams design,
+        automate, and ship the platforms their operations depend on. The work
+        blends <Highlight>technical strategy</Highlight>, product engineering,
+        and clear implementation.
       </motion.p>
 
-      <motion.div variants={itemVariants} className="mt-8 mb-3">
+      <motion.div
+        variants={itemVariants}
+        className="mt-8 grid max-w-230 gap-3 border-y border-white/10 py-5 sm:grid-cols-3"
+      >
+        {[
+          ["Strategy", "Architecture, scope, and delivery decisions."],
+          ["Build", "Web platforms, automations, and integrations."],
+          ["Handoff", "Documentation, review, and maintainable systems."],
+        ].map(([title, description]) => (
+          <div key={title}>
+            <p className="text-sm font-semibold text-white">{title}</p>
+            <p className="mt-2 text-sm leading-6 text-zinc-500">
+              {description}
+            </p>
+          </div>
+        ))}
+      </motion.div>
+
+      <motion.div variants={itemVariants} className="mt-8 mb-3 flex flex-wrap gap-3">
         <Link
-          href="/blogs"
+          href="/services#contact"
           rel="noreferrer"
           className="inline-flex min-h-11 items-center justify-center rounded-full border border-[#e4db55]/60 bg-[#e4db55] px-5 text-sm font-semibold text-black transition-colors hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#e4db55] focus:ring-offset-2 focus:ring-offset-black"
         >
-          Read the blog
+          Start a consulting inquiry
+        </Link>
+        <Link
+          href="/services"
+          className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/15 px-5 text-sm font-semibold text-white transition-colors hover:border-white/40 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/40 focus:ring-offset-2 focus:ring-offset-black"
+        >
+          Explore services
         </Link>
       </motion.div>
     </motion.div>

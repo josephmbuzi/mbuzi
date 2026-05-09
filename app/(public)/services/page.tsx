@@ -7,14 +7,14 @@ import { siteConfig } from "../../lib/site";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Software engineering services from Joseph Mbuzi for digital platforms, business automation, and developer experience.",
+    "Software consulting services from Joseph Mbuzi for platform builds, workflow automation, technical strategy, and developer experience.",
   alternates: {
     canonical: "/services",
   },
   openGraph: {
     title: "Services | Joseph Mbuzi",
     description:
-      "Software engineering services from Joseph Mbuzi for digital platforms, business automation, and developer experience.",
+      "Understand Joseph Mbuzi's software consulting services for platform builds, workflow automation, technical strategy, and developer experience.",
     url: "/services",
     images: [
       {
@@ -30,28 +30,59 @@ export const metadata: Metadata = {
 const services = [
   {
     eyebrow: "01",
-    title: "Digital platform engineering",
+    title: "Build a web platform",
+    bestFor: "You need a customer portal, internal dashboard, booking flow, marketplace, or data-backed web product.",
     description:
-      "Designing and building web platforms with reliable architecture, clean product flows, and maintainable delivery foundations.",
+      "I help turn the idea into a working product: user flows, interface structure, backend logic, integrations, and deployment-ready implementation.",
+    outcomes: [
+      "Clear product scope and technical plan",
+      "Responsive web application or product feature",
+      "Maintainable codebase with handoff notes",
+    ],
   },
   {
     eyebrow: "02",
-    title: "Business automation",
+    title: "Automate a business workflow",
+    bestFor: "Your team is losing time to spreadsheets, manual follow-ups, repeated approvals, or disconnected tools.",
     description:
-      "Turning repeated operational work into structured systems that reduce manual handoffs, improve visibility, and keep teams moving.",
+      "I map the workflow, remove unnecessary steps, and build the system or integration that makes the process easier to run and track.",
+    outcomes: [
+      "Workflow map and automation plan",
+      "Internal tool, integration, or data flow",
+      "Cleaner visibility for the team using it",
+    ],
   },
   {
     eyebrow: "03",
-    title: "Developer experience",
+    title: "Improve an existing system",
+    bestFor: "You already have software, but it is hard to change, poorly documented, slow to ship, or unclear for new contributors.",
     description:
-      "Improving internal tools, documentation, integrations, and workflows so engineering teams can ship with less friction.",
+      "I review the product and codebase, identify what is slowing delivery down, and make targeted improvements that reduce friction.",
+    outcomes: [
+      "Codebase and workflow review",
+      "Refactor or implementation plan",
+      "Documentation and cleaner delivery process",
+    ],
+  },
+  {
+    eyebrow: "04",
+    title: "Plan a technical direction",
+    bestFor: "You need technical judgment before hiring, rebuilding, choosing tools, or committing budget to a product idea.",
+    description:
+      "I help you understand the tradeoffs, risks, architecture options, and practical next steps before the expensive work begins.",
+    outcomes: [
+      "Technical discovery and recommendations",
+      "Build-vs-buy and tooling guidance",
+      "Prioritized roadmap for execution",
+    ],
   },
 ];
 
 const process = [
-  "Map the workflow, constraints, and outcome the system needs to support.",
-  "Shape the technical plan around the highest-risk decisions first.",
-  "Build in focused iterations with clear handoff, documentation, and review.",
+  "We clarify the business problem, users, current workflow, and what success should look like.",
+  "I translate that into a practical technical plan with scope, risks, and the first useful version.",
+  "I build or improve the system in focused iterations, with regular review and visible progress.",
+  "You receive documentation, handoff notes, and next-step recommendations so the work can continue cleanly.",
 ];
 
 const servicesJsonLd = {
@@ -102,21 +133,78 @@ export default function ServicesPage() {
             Joseph Mbuzi
           </Link>
 
-          <div className="mt-16 grid gap-4 md:grid-cols-3">
+          <section className="mt-20 grid gap-10 border-t border-white/10 pt-10 lg:grid-cols-[0.85fr_1.15fr]">
+            <div>
+              <p className="text-sm font-semibold uppercase text-[#e4db55]">
+                Services
+              </p>
+              <h1 className="mt-5 max-w-190 text-4xl font-medium leading-tight text-white sm:text-5xl lg:text-6xl">
+                Software consulting for teams that need clearer systems.
+              </h1>
+            </div>
+
+            <div className="max-w-190 lg:pt-12">
+              <p className="text-lg leading-8 text-zinc-300">
+                I help you move from an unclear operational or product problem
+                to a working technical solution. That can mean building a new
+                platform, automating a manual process, improving an existing
+                codebase, or helping you choose the right technical direction.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-2">
+                {[
+                  "For founders",
+                  "For institutions",
+                  "For lean teams",
+                  "Remote friendly",
+                ].map((item) => (
+                  <span
+                    key={item}
+                    className="border border-white/10 bg-white/[0.03] px-3 py-2 text-xs font-semibold uppercase text-zinc-400"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <div className="mt-16 grid gap-4 md:grid-cols-2">
             {services.map((service) => (
               <article
                 key={service.title}
-                className="border border-white/10 bg-zinc-950/70 p-5"
+                className="border border-white/10 bg-zinc-950/70 p-5 md:p-7"
               >
                 <p className="text-xs font-semibold uppercase text-[#e4db55]">
                   {service.eyebrow}
                 </p>
-                <h2 className="mt-8 text-2xl font-medium leading-tight text-white">
+                <h2 className="mt-8 text-2xl font-medium leading-tight text-white sm:text-3xl">
                   {service.title}
                 </h2>
-                <p className="mt-4 text-sm leading-6 text-zinc-400">
+                <p className="mt-4 text-sm font-semibold uppercase leading-6 text-zinc-500">
+                  Best for
+                </p>
+                <p className="mt-2 text-base leading-7 text-zinc-300">
+                  {service.bestFor}
+                </p>
+                <p className="mt-5 text-sm leading-6 text-zinc-400">
                   {service.description}
                 </p>
+                <div className="mt-6 border-t border-white/10 pt-5">
+                  <p className="text-sm font-semibold uppercase text-zinc-500">
+                    What you get
+                  </p>
+                  <ul className="mt-4 space-y-3">
+                    {service.outcomes.map((outcome) => (
+                      <li
+                        key={outcome}
+                        className="flex gap-3 text-sm leading-6 text-zinc-300"
+                      >
+                        <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-[#e4db55]" />
+                        <span>{outcome}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </article>
             ))}
           </div>

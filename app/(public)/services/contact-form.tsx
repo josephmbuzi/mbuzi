@@ -3,10 +3,11 @@
 import { type FormEvent, useState } from "react";
 
 const projectTypes = [
-  "Digital platform",
-  "Business automation",
-  "Developer experience",
-  "Technical strategy",
+  "Build a web platform",
+  "Automate a business workflow",
+  "Improve an existing system",
+  "Plan a technical direction",
+  "Not sure yet",
 ];
 
 type ContactFormProps = {

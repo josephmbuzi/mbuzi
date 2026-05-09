@@ -15,12 +15,13 @@ export const metadata: Metadata = {
   publisher: siteConfig.name,
   keywords: [
     "Joseph Mbuzi",
-    "software engineer",
+    "software consultant",
+    "software engineering consultant",
     "business automation",
     "developer experience",
     "digital platforms",
-    "software engineer",
-    "Zambia software engineer",
+    "technical strategy",
+    "Zambia software consultant",
   ],
   alternates: {
     canonical: "/",
