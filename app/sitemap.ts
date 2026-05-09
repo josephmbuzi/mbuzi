@@ -28,6 +28,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
       images: [`${siteConfig.url}${siteConfig.image}`],
     },
+    {
+      url: `${siteConfig.url}/faq`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+      images: [`${siteConfig.url}${siteConfig.image}`],
+    },
   ];
 
   return [

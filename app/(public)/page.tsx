@@ -4,16 +4,25 @@ import { Hero } from "../components/hero";
 import { siteConfig } from "../lib/site";
 
 export const metadata: Metadata = {
-  title: "Software Consultant",
+  title: "Software Engineer & Consultant",
   description:
-    "Joseph Mbuzi is an independent software consultant helping teams turn messy workflows into reliable platforms, automations, and product systems.",
+    "Joseph Mbuzi is a software engineer and consultant helping teams build web platforms, automate workflows, improve DevOps, and ship maintainable product systems.",
+  keywords: [
+    "Joseph Mbuzi",
+    "software engineer",
+    "software consultant",
+    "DevOps consultant",
+    "full stack developer",
+    "business automation consultant",
+    "Zambia software engineer",
+  ],
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Joseph Mbuzi | Software Consultant",
+    title: "Joseph Mbuzi | Software Engineer & Consultant",
     description:
-      "Independent software consulting for digital platforms, business automation, technical strategy, and maintainable delivery.",
+      "Independent software engineering consulting for web platforms, business automation, DevOps, technical strategy, and maintainable delivery.",
     url: "/",
     images: [
       {
@@ -28,9 +37,9 @@ export const metadata: Metadata = {
 
 const consultingOffers = [
   {
-    title: "Platform clarity",
+    title: "Web platform engineering",
     description:
-      "Shape the architecture, flows, and delivery plan for a web platform before the build becomes expensive to change.",
+      "Plan and build web applications, portals, dashboards, and product features with maintainable architecture.",
   },
   {
     title: "Workflow automation",
@@ -38,14 +47,16 @@ const consultingOffers = [
       "Replace repeated manual work with structured tools, integrations, and internal systems that teams can actually operate.",
   },
   {
-    title: "Delivery rescue",
+    title: "DevOps and delivery support",
     description:
-      "Stabilize a stalled build, clean up the technical path, and create a practical plan for getting useful software shipped.",
+      "Improve deployment flow, environment setup, reliability, and the path from code to production.",
   },
 ];
 
 const proofPoints = [
+  "Software engineering",
   "Product-minded engineering",
+  "DevOps support",
   "Business automation",
   "Developer experience",
   "Technical communication",
@@ -65,7 +76,7 @@ const personJsonLd = {
   name: siteConfig.name,
   url: siteConfig.url,
   image: `${siteConfig.url}${siteConfig.image}`,
-  jobTitle: "Software Consultant",
+  jobTitle: "Software Engineer and Consultant",
   description: siteConfig.description,
   sameAs: [
     siteConfig.links.github,
@@ -75,11 +86,18 @@ const personJsonLd = {
   knowsAbout: [
     "Software engineering",
     "Software consulting",
+    "DevOps",
+    "Full-stack development",
     "Business automation",
     "Developer experience",
     "Digital platforms",
     "Technical strategy",
   ],
+  address: {
+    "@type": "PostalAddress",
+    addressRegion: siteConfig.location.region,
+    addressCountry: siteConfig.location.country,
+  },
 };
 
 export default function Home() {

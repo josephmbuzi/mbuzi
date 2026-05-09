@@ -5,6 +5,7 @@ import { type FormEvent, useState } from "react";
 const projectTypes = [
   "Build a web platform",
   "Automate a business workflow",
+  "Improve DevOps and delivery",
   "Improve an existing system",
   "Plan a technical direction",
   "Not sure yet",

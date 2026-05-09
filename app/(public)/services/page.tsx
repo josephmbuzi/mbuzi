@@ -5,16 +5,25 @@ import { ContactForm } from "./contact-form";
 import { siteConfig } from "../../lib/site";
 
 export const metadata: Metadata = {
-  title: "Services",
+  title: "Software Engineering, DevOps & Consulting Services",
   description:
-    "Software consulting services from Joseph Mbuzi for platform builds, workflow automation, technical strategy, and developer experience.",
+    "Software engineering, DevOps, and consulting services from Joseph Mbuzi for web platforms, workflow automation, technical strategy, and maintainable delivery.",
+  keywords: [
+    "software engineering services",
+    "software consultant",
+    "DevOps consultant",
+    "web platform development",
+    "business automation",
+    "technical strategy consultant",
+    "Zambia software consultant",
+  ],
   alternates: {
     canonical: "/services",
   },
   openGraph: {
-    title: "Services | Joseph Mbuzi",
+    title: "Software Engineering, DevOps & Consulting Services | Joseph Mbuzi",
     description:
-      "Understand Joseph Mbuzi's software consulting services for platform builds, workflow automation, technical strategy, and developer experience.",
+      "Software consulting services for web platforms, workflow automation, DevOps support, technical strategy, and maintainable delivery.",
     url: "/services",
     images: [
       {
@@ -54,6 +63,18 @@ const services = [
   },
   {
     eyebrow: "03",
+    title: "Improve DevOps and delivery",
+    bestFor: "Your deployments are fragile, environments are confusing, releases are slow, or production issues are hard to trace.",
+    description:
+      "I improve the path from code to production by cleaning up deployment workflows, environment setup, release processes, and operational visibility.",
+    outcomes: [
+      "Deployment and environment review",
+      "Cleaner release process or CI/CD workflow",
+      "Practical reliability recommendations",
+    ],
+  },
+  {
+    eyebrow: "04",
     title: "Improve an existing system",
     bestFor: "You already have software, but it is hard to change, poorly documented, slow to ship, or unclear for new contributors.",
     description:
@@ -65,7 +86,7 @@ const services = [
     ],
   },
   {
-    eyebrow: "04",
+    eyebrow: "05",
     title: "Plan a technical direction",
     bestFor: "You need technical judgment before hiring, rebuilding, choosing tools, or committing budget to a product idea.",
     description:
@@ -96,9 +117,27 @@ const servicesJsonLd = {
     "@type": "Person",
     name: siteConfig.name,
     url: siteConfig.url,
+    jobTitle: "Software Engineer and Consultant",
   },
-  areaServed: "Worldwide",
+  areaServed: ["Worldwide", "Zambia", "Lusaka"],
+  address: {
+    "@type": "PostalAddress",
+    addressRegion: siteConfig.location.region,
+    addressCountry: siteConfig.location.country,
+  },
   serviceType: services.map((service) => service.title),
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Software engineering consulting services",
+    itemListElement: services.map((service) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: service.title,
+        description: service.description,
+      },
+    })),
+  },
 };
 
 export default function ServicesPage() {
@@ -108,7 +147,6 @@ export default function ServicesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesJsonLd) }}
       />
-
       <section className="relative isolate overflow-hidden px-5 pb-20 pt-28 sm:px-8 sm:pb-24 sm:pt-36 lg:px-12">
         <div className="absolute inset-x-0 top-0 h-96 bg-gradient-to-b from-zinc-900/60 to-transparent" />
         <div className="absolute right-0 top-20 h-px w-2/3 bg-gradient-to-l from-[#e4db55]/50 to-transparent" />
@@ -139,7 +177,8 @@ export default function ServicesPage() {
                 Services
               </p>
               <h1 className="mt-5 max-w-190 text-4xl font-medium leading-tight text-white sm:text-5xl lg:text-6xl">
-                Software consulting for teams that need clearer systems.
+                Software engineering, DevOps, and consulting for teams that
+                need clearer systems.
               </h1>
             </div>
 
@@ -148,13 +187,15 @@ export default function ServicesPage() {
                 I help you move from an unclear operational or product problem
                 to a working technical solution. That can mean building a new
                 platform, automating a manual process, improving an existing
-                codebase, or helping you choose the right technical direction.
+                codebase, improving DevOps, or helping you choose the right
+                technical direction.
               </p>
               <div className="mt-8 flex flex-wrap gap-2">
                 {[
                   "For founders",
                   "For institutions",
                   "For lean teams",
+                  "DevOps support",
                   "Remote friendly",
                 ].map((item) => (
                   <span

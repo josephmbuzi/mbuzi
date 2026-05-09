@@ -39,7 +39,7 @@ export function AnimatedHeroContent() {
         variants={itemVariants}
         className="mt-24 text-sm font-semibold uppercase tracking-[0.18em] text-[#e4db55] sm:mt-26 md:mt-28"
       >
-        Software consultant
+        Software engineer, DevOps, and consultant
       </motion.p>
 
       <motion.h1
@@ -54,9 +54,9 @@ export function AnimatedHeroContent() {
         className="mt-7 max-w-210 text-lg leading-8 text-zinc-300 sm:text-xl"
       >
         Joseph Mbuzi helps founders, institutions, and lean teams design,
-        automate, and ship the platforms their operations depend on. The work
-        blends <Highlight>technical strategy</Highlight>, product engineering,
-        and clear implementation.
+        automate, deploy, and ship the platforms their operations depend on.
+        The work blends <Highlight>technical strategy</Highlight>, DevOps,
+        product engineering, and clear implementation.
       </motion.p>
 
       <motion.div
@@ -77,7 +77,10 @@ export function AnimatedHeroContent() {
         ))}
       </motion.div>
 
-      <motion.div variants={itemVariants} className="mt-8 mb-3 flex flex-wrap gap-3">
+      <motion.div
+        variants={itemVariants}
+        className="mt-8 mb-3 flex flex-wrap gap-3"
+      >
         <Link
           href="/services#contact"
           rel="noreferrer"

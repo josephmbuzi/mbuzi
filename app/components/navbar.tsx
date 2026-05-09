@@ -2,6 +2,7 @@ import Link from "next/link";
 
 const navItems = [
   { label: "Services", href: "/services" },
+  { label: "FAQ", href: "/faq" },
   { label: "Blogs", href: "/blogs" },
   { label: "GitHub", href: "https://github.com/josephmbuzi" },
 ];

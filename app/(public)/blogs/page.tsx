@@ -7,14 +7,22 @@ import { getBlogPostsFromSupabase } from "../../lib/supabase-blogs";
 export const metadata: Metadata = {
   title: "Blogs",
   description:
-    "Writing from Joseph Mbuzi on systems engineering, business automation, product engineering, and developer experience.",
+    "Writing from Joseph Mbuzi on software engineering, DevOps, business automation, product engineering, and developer experience.",
+  keywords: [
+    "software engineering blog",
+    "DevOps blog",
+    "business automation",
+    "developer experience",
+    "technical strategy",
+    "Joseph Mbuzi",
+  ],
   alternates: {
     canonical: "/blogs",
   },
   openGraph: {
     title: "Blogs | Joseph Mbuzi",
     description:
-      "Writing from Joseph Mbuzi on systems engineering, business automation, product engineering, and developer experience.",
+      "Writing from Joseph Mbuzi on software engineering, DevOps, business automation, product engineering, and developer experience.",
     url: "/blogs",
     images: [
       {
@@ -63,6 +71,35 @@ export default async function BlogsPage() {
           </Link>
 
           <section className="mt-20 border-t border-white/10 pt-10">
+            <div className="mb-10 grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+              <div>
+                <p className="text-sm font-semibold uppercase text-[#e4db55]">
+                  Writing
+                </p>
+                <h1 className="mt-5 max-w-170 text-4xl font-medium leading-tight text-white sm:text-5xl">
+                  Notes on software engineering, automation, and delivery.
+                </h1>
+              </div>
+
+              <div className="max-w-190 lg:pt-12">
+                <p className="text-lg leading-8 text-zinc-300">
+                  Practical writing for founders, engineers, and teams working
+                  through product builds, DevOps decisions, workflow automation,
+                  and maintainable software delivery.
+                </p>
+                <div className="mt-8 flex flex-wrap gap-2">
+                  {blogTopics.map((topic) => (
+                    <span
+                      key={topic.title}
+                      className="border border-white/10 bg-white/[0.03] px-3 py-2 text-xs font-semibold uppercase text-zinc-400"
+                    >
+                      {topic.title}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
             {blogPosts.length > 0 ? (
               <div className="grid gap-4 md:grid-cols-2">
                 {blogPosts.map((post) => (
