@@ -3,6 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { ContactForm } from "./contact-form";
 import { siteConfig } from "../../lib/site";
+import {
+  JsonLd,
+  buildBreadcrumbSchema,
+  buildProfessionalServiceSchema,
+} from "../../lib/seo-schema";
 
 export const metadata: Metadata = {
   title: "Software Engineering, DevOps & Consulting Services",
@@ -107,24 +112,7 @@ const process = [
 ];
 
 const servicesJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: `${siteConfig.name} Services`,
-  url: `${siteConfig.url}/services`,
-  image: `${siteConfig.url}${siteConfig.image}`,
-  description: metadata.description,
-  founder: {
-    "@type": "Person",
-    name: siteConfig.name,
-    url: siteConfig.url,
-    jobTitle: "Software Engineer and Consultant",
-  },
-  areaServed: ["Worldwide", "Zambia", "Lusaka"],
-  address: {
-    "@type": "PostalAddress",
-    addressRegion: siteConfig.location.region,
-    addressCountry: siteConfig.location.country,
-  },
+  ...buildProfessionalServiceSchema(),
   serviceType: services.map((service) => service.title),
   hasOfferCatalog: {
     "@type": "OfferCatalog",
@@ -143,9 +131,14 @@ const servicesJsonLd = {
 export default function ServicesPage() {
   return (
     <main className="min-h-screen bg-black text-white">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesJsonLd) }}
+      <JsonLd
+        data={[
+          servicesJsonLd,
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+          ]),
+        ]}
       />
       <section className="relative isolate overflow-hidden px-5 pb-20 pt-28 sm:px-8 sm:pb-24 sm:pt-36 lg:px-12">
         <div className="absolute inset-x-0 top-0 h-96 bg-gradient-to-b from-zinc-900/60 to-transparent" />

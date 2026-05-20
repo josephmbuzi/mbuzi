@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { blogTopics } from "../../lib/blogs";
 import { siteConfig } from "../../lib/site";
+import {
+  JsonLd,
+  buildBlogCollectionSchema,
+  buildBreadcrumbSchema,
+} from "../../lib/seo-schema";
 import { getBlogPostsFromSupabase } from "../../lib/supabase-blogs";
 
 export const metadata: Metadata = {
@@ -35,27 +40,19 @@ export const metadata: Metadata = {
   },
 };
 
-const blogJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Blog",
-  name: "Joseph Mbuzi Blogs",
-  url: `${siteConfig.url}/blogs`,
-  description: metadata.description,
-  author: {
-    "@type": "Person",
-    name: siteConfig.name,
-    url: siteConfig.url,
-  },
-};
-
 export default async function BlogsPage() {
   const blogPosts = await getBlogPostsFromSupabase();
 
   return (
     <main className="min-h-screen bg-black text-white">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }}
+      <JsonLd
+        data={[
+          buildBlogCollectionSchema(blogPosts),
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Blogs", path: "/blogs" },
+          ]),
+        ]}
       />
 
       <section className="relative isolate overflow-hidden px-5 pb-20 pt-28 sm:px-8 sm:pb-24 sm:pt-36 lg:px-12">

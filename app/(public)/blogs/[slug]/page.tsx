@@ -4,6 +4,11 @@ import { notFound } from "next/navigation";
 import { BlogContent } from "../../../components/blog-content";
 import { siteConfig } from "../../../lib/site";
 import {
+  JsonLd,
+  buildBlogPostingSchema,
+  buildBreadcrumbSchema,
+} from "../../../lib/seo-schema";
+import {
   getBlogPostFromSupabase,
   getBlogPostsFromSupabase,
 } from "../../../lib/supabase-blogs";
@@ -69,25 +74,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound();
   }
 
-  const blogPostJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.seoDescription || post.excerpt,
-    datePublished: post.publishedAt,
-    author: {
-      "@type": "Person",
-      name: siteConfig.name,
-      url: siteConfig.url,
-    },
-    mainEntityOfPage: `${siteConfig.url}/blogs/${post.slug}`,
-  };
-
   return (
     <main className="min-h-screen bg-black text-white">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostJsonLd) }}
+      <JsonLd
+        data={[
+          buildBlogPostingSchema(post),
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Blogs", path: "/blogs" },
+            { name: post.title, path: `/blogs/${post.slug}` },
+          ]),
+        ]}
       />
 
       <article className="relative isolate overflow-hidden px-5 pb-20 pt-28 sm:px-8 sm:pb-24 sm:pt-36 lg:px-12">

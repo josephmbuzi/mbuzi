@@ -70,43 +70,9 @@ const engagementSteps = [
   "Build, document, and hand over a system your team can improve.",
 ];
 
-const personJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: siteConfig.name,
-  url: siteConfig.url,
-  image: `${siteConfig.url}${siteConfig.image}`,
-  jobTitle: "Software Engineer and Consultant",
-  description: siteConfig.description,
-  sameAs: [
-    siteConfig.links.github,
-    siteConfig.links.medium,
-    siteConfig.links.quora,
-  ],
-  knowsAbout: [
-    "Software engineering",
-    "Software consulting",
-    "DevOps",
-    "Full-stack development",
-    "Business automation",
-    "Developer experience",
-    "Digital platforms",
-    "Technical strategy",
-  ],
-  address: {
-    "@type": "PostalAddress",
-    addressRegion: siteConfig.location.region,
-    addressCountry: siteConfig.location.country,
-  },
-};
-
 export default function Home() {
   return (
     <main className="min-h-screen bg-black text-white">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
-      />
       <Hero />
 
       <section className="px-5 pb-20 sm:px-8 lg:px-12">

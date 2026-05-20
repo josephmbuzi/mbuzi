@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { faqs } from "../../lib/faqs";
 import { siteConfig } from "../../lib/site";
+import { JsonLd, buildBreadcrumbSchema } from "../../lib/seo-schema";
 
 export const metadata: Metadata = {
   title: "FAQ",
@@ -49,9 +50,14 @@ const faqJsonLd = {
 export default function FaqPage() {
   return (
     <main className="min-h-screen bg-black text-white">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      <JsonLd
+        data={[
+          faqJsonLd,
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "FAQ", path: "/faq" },
+          ]),
+        ]}
       />
 
       <section className="relative isolate overflow-hidden px-5 pb-20 pt-28 sm:px-8 sm:pb-24 sm:pt-36 lg:px-12">
