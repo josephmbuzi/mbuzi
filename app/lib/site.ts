@@ -13,9 +13,9 @@ const whatsappMessage = [
 
 export const siteConfig = {
   name: "Joseph Mbuzi",
-  title: "Joseph Mbuzi | Software Engineer & Consultant",
+  title: "Joseph Mbuzi | Software Engineer & Systems Engineer",
   description:
-    "Joseph Mbuzi is a software engineer and independent consultant helping teams build web platforms, automate workflows, improve DevOps, and ship maintainable product systems.",
+    "Joseph Mbuzi is a software engineer at Yamfumu Technologies building healthcare, education, and legal-tech platforms on React, Node.js, and Microsoft Azure, currently learning payment infrastructure.",
   url: "https://mbuzi.bio",
   locale: "en_US",
   image: "/joseph.png",

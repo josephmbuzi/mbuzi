@@ -10,25 +10,24 @@ import {
 } from "../../lib/seo-schema";
 
 export const metadata: Metadata = {
-  title: "Software Engineering, DevOps & Consulting Services",
+  title: "How I Can Help",
   description:
-    "Software engineering, DevOps, and consulting services from Joseph Mbuzi for web platforms, workflow automation, technical strategy, and maintainable delivery.",
+    "Ways to work with Joseph Mbuzi: web platform engineering, workflow automation, DevOps support, and technical strategy.",
   keywords: [
     "software engineering services",
-    "software consultant",
-    "DevOps consultant",
+    "freelance software engineer",
+    "DevOps support",
     "web platform development",
     "business automation",
-    "technical strategy consultant",
-    "Zambia software consultant",
+    "Zambia software engineer",
   ],
   alternates: {
     canonical: "/services",
   },
   openGraph: {
-    title: "Software Engineering, DevOps & Consulting Services | Joseph Mbuzi",
+    title: "How I Can Help | Joseph Mbuzi",
     description:
-      "Software consulting services for web platforms, workflow automation, DevOps support, technical strategy, and maintainable delivery.",
+      "Ways to work with Joseph Mbuzi: web platform engineering, workflow automation, DevOps support, and technical strategy.",
     url: "/services",
     images: [
       {
@@ -167,28 +166,26 @@ export default function ServicesPage() {
           <section className="mt-20 grid gap-10 border-t border-white/10 pt-10 lg:grid-cols-[0.85fr_1.15fr]">
             <div>
               <p className="text-sm font-semibold uppercase text-[#e4db55]">
-                Services
+                How I can help
               </p>
               <h1 className="mt-5 max-w-190 text-4xl font-medium leading-tight text-white sm:text-5xl lg:text-6xl">
-                Software engineering, DevOps, and consulting for teams that
-                need clearer systems.
+                Beyond my day-to-day role, here&apos;s where I can help.
               </h1>
             </div>
 
             <div className="max-w-190 lg:pt-12">
               <p className="text-lg leading-8 text-zinc-300">
-                I help you move from an unclear operational or product problem
-                to a working technical solution. That can mean building a new
-                platform, automating a manual process, improving an existing
-                codebase, improving DevOps, or helping you choose the right
-                technical direction.
+                Outside of my work at Yamfumu Technologies, I take on a small
+                number of freelance and contract projects. That can mean
+                building a new platform, automating a manual process,
+                improving an existing codebase, tightening up DevOps, or
+                helping you think through a technical direction.
               </p>
               <div className="mt-8 flex flex-wrap gap-2">
                 {[
-                  "For founders",
-                  "For institutions",
-                  "For lean teams",
-                  "DevOps support",
+                  "Freelance projects",
+                  "Full-stack development",
+                  "Azure & DevOps",
                   "Remote friendly",
                 ].map((item) => (
                   <span
@@ -274,11 +271,10 @@ export default function ServicesPage() {
           >
             <div>
               <p className="text-sm font-semibold uppercase text-[#e4db55]">
-                Start a project
+                Get in touch
               </p>
               <h2 className="mt-5 max-w-190 text-3xl font-medium leading-tight text-white sm:text-4xl">
-                Bring a workflow, platform, or product problem that needs
-                structure.
+                Have a project, or just want to say hello?
               </h2>
               <p className="mt-5 max-w-150 text-base leading-7 text-zinc-400">
                 Share the context, timeline, and what needs to change. I will

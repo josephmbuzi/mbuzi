@@ -152,7 +152,7 @@ export function ContactForm({ email }: ContactFormProps) {
           disabled={status?.type === "pending"}
           className="inline-flex min-h-12 items-center justify-center border border-[#e4db55]/70 bg-[#e4db55] px-5 text-sm font-semibold text-black transition-colors hover:bg-white"
         >
-          {status?.type === "pending" ? "Sending..." : "Send inquiry"}
+          {status?.type === "pending" ? "Sending..." : "Send message"}
         </button>
         <a
           href={`mailto:${email}`}
